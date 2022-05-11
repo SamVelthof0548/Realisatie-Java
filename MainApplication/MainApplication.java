@@ -5,89 +5,75 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MainApplication extends JFrame implements ActionListener {
-    private JButton routeButton;
-    private JButton stockButton;
-    private JButton customerButton;
-    private JButton orderButton;
-    private JButton returnButton;
-    private RouteManager routePage;
-    private StockManager stockPage;
-    private CustomerManager customerPage;
-    private OrderManager orderPage;
-    private ReturnManager returnPage;
+public class MainApplication extends JFrame implements ActionListener{
+    private JButton BtnRoute;
+    private JButton BtnReturns;
+    private JButton BtnStock;
+    private JButton BtnCustomer;
+    private JButton BtnOrders;
+    private JPanel MainFrame;
+    private JPanel MainScreen;
+
+    private RoutePage routePage;
+//    private StockPage stockPage;
+//    private CustomerPage customerPage;
+//    private OrderPage orderPage;
+//    private ReturnPage returnPage;
 
     public MainApplication()
     {
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        this.setTitle("KBS Project");
-        this.setLayout(new GridLayout(2,1));
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setTitle("KBS Project");
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setContentPane(MainFrame);
 
-        NavBar();
         importPages();
 
-        routePage.setVisible(true);
+        BtnRoute.addActionListener(this);
+        BtnReturns.addActionListener(this);
+        BtnStock.addActionListener(this);
+        BtnCustomer.addActionListener(this);
+        BtnOrders.addActionListener(this);
 
-        this.setResizable(true);
-        this.setVisible(true);
-    }
-
-    private void NavBar()
-    {
-        this.setLayout(new FlowLayout());
-
-        // Routebepaling pagina
-        this.add(routeButton = new JButton("Routebepaling"));
-        routeButton.addActionListener(this);
-
-        // Voorraad pagina
-        this.add(stockButton = new JButton("Voorraad"));
-        stockButton.addActionListener(this);
-
-        // Klanten pagina
-        this.add(customerButton = new JButton("Klanten"));
-        customerButton.addActionListener(this);
-
-        // Orders pagina
-        this.add(orderButton = new JButton("Orders"));
-        orderButton.addActionListener(this);
-
-        // Retourzendingen pagina
-        this.add(returnButton = new JButton("Retourzendingen"));
-        returnButton.addActionListener(this);
+        setVisible(true);
     }
 
     public void importPages()
     {
-        this.add(routePage = new RouteManager());
-        this.add(stockPage = new StockManager());
-        this.add(customerPage = new CustomerManager());
-        this.add(orderPage = new OrderManager());
-        this.add(returnPage = new ReturnManager());
+        MainScreen.add(routePage = new RoutePage());
+
+        // TODO: add these pages
+//        this.add(stockPage = new StockPage());
+//        this.add(customerPage = new CustomerPage());
+//        this.add(orderPage = new OrderPage());
+//        this.add(returnPage = new ReturnPage());
     }
 
     public void actionPerformed(ActionEvent e) {
-        routePage.setVisible(false);
-        stockPage.setVisible(false);
-        customerPage.setVisible(false);
-        orderPage.setVisible(false);
-        returnPage.setVisible(false);
+        routePage.visible(true);
 
-        if (e.getSource() == routeButton) {
+        // TODO: add these pages
+//        stockPage.setVisible(false);
+//        customerPage.setVisible(false);
+//        orderPage.setVisible(false);
+//        returnPage.setVisible(false);
+
+        if (e.getSource() == BtnRoute) {
             routePage.setVisible(true);
         }
-        if (e.getSource() == stockButton) {
-            stockPage.setVisible(true);
-        }
-        if (e.getSource() == customerButton) {
-            customerPage.setVisible(true);
-        }
-        if (e.getSource() == orderButton) {
-            orderPage.setVisible(true);
-        }
-        if (e.getSource() == returnButton) {
-            returnPage.setVisible(true);
-        }
+
+        // TODO: add these pages
+//        if (e.getSource() == stockButton) {
+//            stockPage.setVisible(true);
+//        }
+//        if (e.getSource() == customerButton) {
+//            customerPage.setVisible(true);
+//        }
+//        if (e.getSource() == orderButton) {
+//            orderPage.setVisible(true);
+//        }
+//        if (e.getSource() == returnButton) {
+//            returnPage.setVisible(true);
+//        }
     }
 }
