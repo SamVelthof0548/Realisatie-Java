@@ -6,14 +6,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MainApplication extends JFrame implements ActionListener{
-    private JButton BtnRoute;
-    private JButton BtnReturns;
-    private JButton BtnStock;
-    private JButton BtnCustomer;
-    private JButton BtnOrders;
-    private JPanel MainFrame;
-    private JPanel MainScreen;
-
+    private JButton BtnRoute, BtnReturns, BtnStock, BtnCustomer, BtnOrders;
+    private JPanel MainFrame, MainScreen;
+    private CardLayout card;
     private RoutePage routePage;
     private StockPage stockPage;
     private CustomerPage customerPage;
@@ -25,10 +20,20 @@ public class MainApplication extends JFrame implements ActionListener{
         setTitle("KBS Project");
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setContentPane(MainFrame);
 
-        importPages();
+        setContentPane(MainFrame); // set content pane (navbar)
 
+        card = new CardLayout(); // create CardLayout
+        MainScreen.setLayout(card); // set CardLayout as MainScreen
+
+        // add pages to the MainScreen CardLayout
+        MainScreen.add(routePage = new RoutePage(), "route");
+        MainScreen.add(stockPage = new StockPage(), "stock");
+        MainScreen.add(customerPage = new CustomerPage(), "customer");
+        MainScreen.add(orderPage = new OrderPage(), "orders");
+        MainScreen.add(returnPage = new ReturnPage(), "returns");
+
+        // add action listeners
         BtnRoute.addActionListener(this);
         BtnReturns.addActionListener(this);
         BtnStock.addActionListener(this);
@@ -38,38 +43,22 @@ public class MainApplication extends JFrame implements ActionListener{
         setVisible(true);
     }
 
-    public void importPages()
-    {
-        MainScreen.add(routePage = new RoutePage());
-
-        MainScreen.add(stockPage = new StockPage());
-        MainScreen.add(customerPage = new CustomerPage());
-        MainScreen.add(orderPage = new OrderPage());
-        MainScreen.add(returnPage = new ReturnPage());
-    }
-
     public void actionPerformed(ActionEvent e) {
-        routePage.visible(true);
-
-        stockPage.visible(false);
-        customerPage.visible(false);
-        orderPage.visible(false);
-        returnPage.visible(false);
 
         if (e.getSource() == BtnRoute) {
-            routePage.setVisible(true);
+            card.show(MainScreen, "route");
         }
         if (e.getSource() == BtnStock) {
-            stockPage.setVisible(true);
+            card.show(MainScreen, "stock");
         }
         if (e.getSource() == BtnCustomer) {
-            customerPage.setVisible(true);
+            card.show(MainScreen, "customer");
         }
         if (e.getSource() == BtnOrders) {
-            orderPage.setVisible(true);
+            card.show(MainScreen, "orders");
         }
         if (e.getSource() == BtnReturns) {
-            returnPage.setVisible(true);
+            card.show(MainScreen, "returns");
         }
     }
 }

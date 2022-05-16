@@ -3,7 +3,7 @@ package MainApplication;
 import javax.swing.*;
 import java.awt.*;
 
-public class ReturnPage extends JFrame{
+public class ReturnPage extends JPanel {
 
     private JPanel Retouren;
     private JLabel retourenLabel;
@@ -16,11 +16,6 @@ public class ReturnPage extends JFrame{
     public ReturnPage(){
         add(Retouren);
         Retouren.setPreferredSize(new Dimension(screenWidth, 500));
-        Retouren.setVisible(false);
-    }
-
-    public void visible(boolean value)
-    {
-        Retouren.setVisible(value);
+        Retouren.setVisible(true);
     }
 }

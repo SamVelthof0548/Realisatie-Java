@@ -21,11 +21,6 @@ public class RoutePage extends JPanel {
     public RoutePage() {
         add(Routebepaling);
         Routebepaling.setPreferredSize(new Dimension(screenWidth, 500));
-        Routebepaling.setVisible(false);
-    }
-
-    public void visible(boolean value)
-    {
-        Routebepaling.setVisible(value);
+        Routebepaling.setVisible(true);
     }
 }

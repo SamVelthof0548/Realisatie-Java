@@ -3,7 +3,7 @@ package MainApplication;
 import javax.swing.*;
 import java.awt.*;
 
-public class StockPage extends JFrame{
+public class StockPage extends JPanel {
     private JPanel Voorraad;
     private JLabel labelVoorraad;
     private JPanel voorraadWeergeven;
@@ -15,12 +15,6 @@ public class StockPage extends JFrame{
     public StockPage(){
         add(Voorraad);
         Voorraad.setPreferredSize(new Dimension(screenWidth, 500));
-        Voorraad.setVisible(false);
-    }
-
-
-    public void visible(boolean value)
-    {
-        Voorraad.setVisible(value);
+        Voorraad.setVisible(true);
     }
 }

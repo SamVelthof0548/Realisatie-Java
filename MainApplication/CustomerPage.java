@@ -3,7 +3,7 @@ package MainApplication;
 import javax.swing.*;
 import java.awt.*;
 
-public class CustomerPage extends JFrame{
+public class CustomerPage extends JPanel {
 
     private JPanel Klanten;
     private JLabel labelKlanten;
@@ -16,11 +16,6 @@ public class CustomerPage extends JFrame{
     public CustomerPage(){
         add(Klanten);
         Klanten.setPreferredSize(new Dimension(screenWidth, 500));
-        Klanten.setVisible(false);
-    }
-
-    public void visible(boolean value)
-    {
-        Klanten.setVisible(value);
+        Klanten.setVisible(true);
     }
 }

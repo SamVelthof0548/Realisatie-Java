@@ -3,7 +3,7 @@ package MainApplication;
 import javax.swing.*;
 import java.awt.*;
 
-public class OrderPage extends JFrame{
+public class OrderPage extends JPanel {
 
 
     private JPanel Orders;
@@ -17,11 +17,6 @@ public class OrderPage extends JFrame{
     public OrderPage(){
         add(Orders);
         Orders.setPreferredSize(new Dimension(screenWidth, 500));
-        Orders.setVisible(false);
-    }
-
-    public void visible(boolean value)
-    {
-        Orders.setVisible(value);
+        Orders.setVisible(true);
     }
 }
