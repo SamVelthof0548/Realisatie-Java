@@ -42,7 +42,6 @@ public class MainApplication extends JFrame implements ActionListener{
     {
         MainScreen.add(routePage = new RoutePage());
 
-        // TODO: add these pages
         MainScreen.add(stockPage = new StockPage());
         MainScreen.add(customerPage = new CustomerPage());
         MainScreen.add(orderPage = new OrderPage());
@@ -52,7 +51,6 @@ public class MainApplication extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         routePage.visible(true);
 
-        // TODO: add these pages
         stockPage.visible(false);
         customerPage.visible(false);
         orderPage.visible(false);
@@ -61,18 +59,16 @@ public class MainApplication extends JFrame implements ActionListener{
         if (e.getSource() == BtnRoute) {
             routePage.setVisible(true);
         }
-
-        // TODO: add these pages
         if (e.getSource() == BtnStock) {
             stockPage.setVisible(true);
         }
         if (e.getSource() == BtnCustomer) {
             customerPage.setVisible(true);
         }
-        if (e.getSource() == orderButton) {
+        if (e.getSource() == BtnOrders) {
             orderPage.setVisible(true);
         }
-        if (e.getSource() == returnButton) {
+        if (e.getSource() == BtnReturns) {
             returnPage.setVisible(true);
         }
     }
