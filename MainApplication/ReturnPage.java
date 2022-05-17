@@ -7,7 +7,6 @@ public class ReturnPage extends JPanel {
 
     private JPanel Retouren;
     private JLabel retourenLabel;
-    private JPanel retourenWeergeven;
     private JTable JTabelRetouren;
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     int screenHeight = screenSize.height;
@@ -20,6 +19,20 @@ public class ReturnPage extends JPanel {
     }
 
     private void createUIComponents() {
+        String[] ReturnColumnNames = {
+                "Retournr.",
+                "Ordernr.",
+                "Klantnr.",
+                "Retour datum",
+                "Opmerking",
+                "Status"
+        };
 
+        String[][] ReturnData = {
+                {"001","007","800","23-03-2022","Verkeerde kleur","Open"},
+                {"002","090","123","23-01-2022","Kapot geleverd","Ontvangen"}
+        };
+
+        JTabelRetouren = new JTable(ReturnData,ReturnColumnNames);
     }
 }

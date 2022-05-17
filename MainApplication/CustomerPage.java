@@ -8,8 +8,8 @@ public class CustomerPage extends JPanel {
 
     private JPanel Klanten;
     private JLabel labelKlanten;
+    private JScrollPane klantenWeergeven;
     private JTable JTabelKlanten;
-    private JPanel klantenWeergeven;
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     int screenHeight = screenSize.height;
     int screenWidth = screenSize.width;
@@ -36,9 +36,5 @@ public class CustomerPage extends JPanel {
         };
 
         JTabelKlanten = new JTable(CustomerData,CustomerColumnNames);
-    }
-
-    private void $$$setupUI$$$() {
-        createUIComponents();
     }
 }

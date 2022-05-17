@@ -6,7 +6,7 @@ import java.awt.*;
 public class StockPage extends JPanel {
     private JPanel Voorraad;
     private JLabel labelVoorraad;
-    private JPanel voorraadWeergeven;
+    private JScrollPane voorraadWeergeven;
     private JTable JTabelVoorraad;
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     int screenHeight = screenSize.height;
@@ -34,9 +34,5 @@ public class StockPage extends JPanel {
         };
 
         JTabelVoorraad = new JTable(StockData,StockColumnNames);
-    }
-
-    private void $$$setupUI$$$() {
-        createUIComponents();
     }
 }
