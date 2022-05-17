@@ -18,4 +18,8 @@ public class ReturnPage extends JPanel {
         Retouren.setPreferredSize(new Dimension(screenWidth, 500));
         Retouren.setVisible(true);
     }
+
+    private void createUIComponents() {
+
+    }
 }

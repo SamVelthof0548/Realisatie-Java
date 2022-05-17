@@ -19,4 +19,8 @@ public class OrderPage extends JPanel {
         Orders.setPreferredSize(new Dimension(screenWidth, 500));
         Orders.setVisible(true);
     }
+
+    private void createUIComponents() {
+
+    }
 }
