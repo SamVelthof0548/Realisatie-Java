@@ -3,14 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="233e2c72-1d92-4178-8eb3-f35a8c4e6c4c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MainApplication/CustomerPage.form" beforeDir="false" afterPath="$PROJECT_DIR$/MainApplication/CustomerPage.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MainApplication/CustomerPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/MainApplication/CustomerPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MainApplication/ReturnPage.form" beforeDir="false" afterPath="$PROJECT_DIR$/MainApplication/ReturnPage.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MainApplication/ReturnPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/MainApplication/ReturnPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MainApplication/StockPage.form" beforeDir="false" afterPath="$PROJECT_DIR$/MainApplication/StockPage.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MainApplication/StockPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/MainApplication/StockPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Realisatie-Java/MainApplication/CustomerPage.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Realisatie-Java/MainApplication/CustomerPage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Realisatie-Java/MainApplication/StockPage.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Realisatie-Java/MainApplication/StockPage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MainApplication/OrderPage.form" beforeDir="false" afterPath="$PROJECT_DIR$/MainApplication/OrderPage.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MainApplication/OrderPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/MainApplication/OrderPage.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

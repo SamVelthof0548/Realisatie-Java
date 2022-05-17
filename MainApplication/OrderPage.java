@@ -8,7 +8,7 @@ public class OrderPage extends JPanel {
 
     private JPanel Orders;
     private JLabel labelOrders;
-    private JPanel ordersWeergeven;
+    private JScrollPane ordersWeergeven;
     private JTable JTabelOrders;
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     int screenHeight = screenSize.height;
@@ -21,6 +21,19 @@ public class OrderPage extends JPanel {
     }
 
     private void createUIComponents() {
+        String[] OrderColumnNames = {
+                "Ordernr.",
+                "Klantnr.",
+                "Bezorg datum",
+                "Opmerking",
+                "Status"
+        };
 
+        String[][] OrderData = {
+                {"001","800","23-04-2022","","Open"},
+                {"002","123","26-01-2022","Graag kartonnen doos","Ontvangen"}
+        };
+
+        JTabelOrders = new JTable(OrderData,OrderColumnNames);
     }
 }
