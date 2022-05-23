@@ -2,9 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="233e2c72-1d92-4178-8eb3-f35a8c4e6c4c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/DataBaseConnection/SQLMethods.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Realisatie-Java.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Realisatie-Java.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/mysql_connector_java.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MainApplication/OrderPage.form" beforeDir="false" afterPath="$PROJECT_DIR$/MainApplication/OrderPage.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MainApplication/CustomerPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/MainApplication/CustomerPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MainApplication/OrderPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/MainApplication/OrderPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MainApplication/ReturnPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/MainApplication/ReturnPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MainApplication/StockPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/MainApplication/StockPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/mysql-connector-java-5.1.36.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/mysql-connector-java-8.0.27.jar" beforeDir="false" afterPath="$PROJECT_DIR$/lib/mysql-connector-java-8.0.28.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Realisatie-Java/.idea/Realisatie-Java.iml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Realisatie-Java/.idea/Realisatie-Java.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Realisatie-Java/.idea/libraries/mysql_connector_java.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Realisatie-Java/.idea/libraries/mysql_connector_java.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Realisatie-Java/MainApplication/CustomerPage.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Realisatie-Java/MainApplication/CustomerPage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Realisatie-Java/MainApplication/OrderPage.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Realisatie-Java/MainApplication/OrderPage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Realisatie-Java/MainApplication/StockPage.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Realisatie-Java/MainApplication/StockPage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Realisatie-Java/lib/mysql-connector-java-8.0.27.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Realisatie-Java/main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Realisatie-Java/main.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,6 +35,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -46,7 +69,7 @@
     <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH" value="255" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Libraries" />
-    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="RunManager" selected="Application.main">

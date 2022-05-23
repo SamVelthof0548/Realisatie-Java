@@ -2,8 +2,10 @@ package MainApplication;
 
 import javax.swing.*;
 import java.awt.*;
+import DataBaseConnection.SQLMethods;
 
-public class ReturnPage extends JPanel {
+public class ReturnPage extends JPanel
+{
 
     private JPanel Retouren;
     private JLabel retourenLabel;
@@ -12,26 +14,20 @@ public class ReturnPage extends JPanel {
     int screenHeight = screenSize.height;
     int screenWidth = screenSize.width;
 
-    public ReturnPage(){
+    public ReturnPage()
+    {
         add(Retouren);
         Retouren.setPreferredSize(new Dimension(screenWidth, 500));
         Retouren.setVisible(true);
     }
 
-    private void createUIComponents() {
-        String[] ReturnColumnNames = {
-                "Retournr.",
-                "Ordernr.",
-                "Klantnr.",
-                "Retour datum",
-                "Opmerking",
-                "Status"
-        };
+    private void createUIComponents()
+    {
+        SQLMethods sql = new SQLMethods();
+        sql.CreateDataBaseConnection();
 
-        String[][] ReturnData = {
-                {"001","007","800","23-03-2022","Verkeerde kleur","Open"},
-                {"002","090","123","23-01-2022","Kapot geleverd","Ontvangen"}
-        };
+        String[] ReturnColumnNames = {"Retournummer","Ordernummer","Klantnummer","Retourdatum","Opmerkingen","Status"};
+        String[][] ReturnData = sql.ViewReturnData();
 
         JTabelRetouren = new JTable(ReturnData,ReturnColumnNames);
     }

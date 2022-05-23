@@ -1,11 +1,11 @@
 package MainApplication;
 
+import DataBaseConnection.SQLMethods;
 import javax.swing.*;
 import java.awt.*;
 
-public class OrderPage extends JPanel {
-
-
+public class OrderPage extends JPanel
+{
     private JPanel Orders;
     private JLabel labelOrders;
     private JScrollPane ordersWeergeven;
@@ -14,25 +14,20 @@ public class OrderPage extends JPanel {
     int screenHeight = screenSize.height;
     int screenWidth = screenSize.width;
 
-    public OrderPage(){
+    public OrderPage()
+    {
         add(Orders);
         Orders.setPreferredSize(new Dimension(screenWidth, 500));
         Orders.setVisible(true);
     }
 
-    private void createUIComponents() {
-        String[] OrderColumnNames = {
-                "Ordernr.",
-                "Klantnr.",
-                "Bezorg datum",
-                "Opmerking",
-                "Status"
-        };
+    private void createUIComponents()
+    {
+        SQLMethods sql = new SQLMethods();
+        sql.CreateDataBaseConnection();
 
-        String[][] OrderData = {
-                {"001","800","23-04-2022","","Open"},
-                {"002","123","26-01-2022","Graag kartonnen doos","Ontvangen"}
-        };
+        String[] OrderColumnNames = {"Ordernummer","Klantnummer","Orderdatum","Verwachte leverdatum","Opmerkingen","Status"};
+        String[][] OrderData = sql.ViewOrderData();
 
         JTabelOrders = new JTable(OrderData,OrderColumnNames);
     }

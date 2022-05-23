@@ -2,8 +2,10 @@ package MainApplication;
 
 import javax.swing.*;
 import java.awt.*;
+import DataBaseConnection.SQLMethods;
 
-public class StockPage extends JPanel {
+public class StockPage extends JPanel
+{
     private JPanel Voorraad;
     private JLabel labelVoorraad;
     private JScrollPane voorraadWeergeven;
@@ -12,26 +14,20 @@ public class StockPage extends JPanel {
     int screenHeight = screenSize.height;
     int screenWidth = screenSize.width;
 
-    public StockPage(){
+    public StockPage()
+    {
         add(Voorraad);
         Voorraad.setPreferredSize(new Dimension(screenWidth, 500));
         Voorraad.setVisible(true);
     }
 
-    private void createUIComponents() {
-        String[] StockColumnNames = {
-                "Art.nr.",
-                "Productnaam",
-                "Prijs",
-                "Afmetingen lxbxh cm",
-                "Aantal op voorraad",
-                "EAN-nummer"
-        };
+    private void createUIComponents()
+    {
+        SQLMethods sql = new SQLMethods();
+        sql.CreateDataBaseConnection();
 
-        String[][] StockData = {
-                {"001","koffiemok zwart","€8,95","10x10x15","50","810150324100"},
-                {"002","koffiemok blauw","€8,95","10x10x15","50","810150324120"}
-        };
+        String[] StockColumnNames = {"Productnummer","Productnaam","Afmetingen","Gewicht","Barcode","Belastingtarief","Inkoopprijs","Verkoopprijs","Hoeveelheid"};
+        String[][] StockData = sql.ViewStockData();
 
         JTabelVoorraad = new JTable(StockData,StockColumnNames);
     }

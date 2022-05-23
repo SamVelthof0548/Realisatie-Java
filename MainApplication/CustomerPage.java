@@ -3,9 +3,10 @@ package MainApplication;
 import javax.swing.*;
 import java.awt.*;
 import javax.swing.JTable;
+import DataBaseConnection.SQLMethods;
 
-public class CustomerPage extends JPanel {
-
+public class CustomerPage extends JPanel
+{
     private JPanel Klanten;
     private JLabel labelKlanten;
     private JScrollPane klantenWeergeven;
@@ -14,26 +15,20 @@ public class CustomerPage extends JPanel {
     int screenHeight = screenSize.height;
     int screenWidth = screenSize.width;
 
-    public CustomerPage(){
+    public CustomerPage()
+    {
         add(Klanten);
         Klanten.setPreferredSize(new Dimension(screenWidth, 500));
         Klanten.setVisible(true);
     }
 
-    private void createUIComponents() {
-        String[] CustomerColumnNames = {
-                "Klantnr.",
-                "Naam",
-                "E-mail",
-                "Woonplaats",
-                "Postcode",
-                "Huisnr."
-        };
+    private void createUIComponents()
+    {
+        SQLMethods sql = new SQLMethods();
+        sql.CreateDataBaseConnection();
 
-        String[][] CustomerData = {
-                {"001","Liam Elschot","Iemand@hotmail.com","Steenwijk","8441 op","900"},
-                {"002","Liam Elschot","Iemand@hotmail.com","Steenwijk","8441 op","900"}
-        };
+        String[] CustomerColumnNames = {"Klantnummer","Geslacht","Voornaam","Tussenvoegsel","Achternaam","Geboortedatum","Mailadres","Telefoonnummer","Adres","Postcode","Woonplaats"};
+        String[][] CustomerData = sql.ViewCustomerData();
 
         JTabelKlanten = new JTable(CustomerData,CustomerColumnNames);
     }
