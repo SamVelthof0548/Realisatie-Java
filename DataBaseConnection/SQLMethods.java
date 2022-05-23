@@ -52,12 +52,12 @@ public class SQLMethods
 
                 data[i][0] = stockItemID + "";
                 data[i][1] = stockItemName;
-                data[i][2] = unitSize;
-                data[i][3] = unitWeight;
+                data[i][2] = unitSize + " cm";
+                data[i][3] = unitWeight + " Kg";
                 data[i][4] = eanCode;
-                data[i][5] = taxRate;
-                data[i][6] = unitPrice;
-                data[i][7] = unitRetailPrice;
+                data[i][5] = taxRate + "%";
+                data[i][6] = "€" + unitPrice;
+                data[i][7] = "€" + unitRetailPrice;
                 data[i][8] = quantity;
 
                 i++;
