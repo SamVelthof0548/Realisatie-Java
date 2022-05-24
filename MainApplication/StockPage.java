@@ -2,14 +2,19 @@ package MainApplication;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import DataBaseConnection.SQLMethods;
 
-public class StockPage extends JPanel
+
+public class StockPage extends JPanel implements ActionListener
 {
     private JPanel Voorraad;
     private JLabel labelVoorraad;
     private JScrollPane voorraadWeergeven;
     private JTable JTabelVoorraad;
+    private JButton JBtoevoegenProduct;
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     int screenHeight = screenSize.height;
     int screenWidth = screenSize.width;
@@ -30,5 +35,15 @@ public class StockPage extends JPanel
         String[][] StockData = sql.ViewStockData();
 
         JTabelVoorraad = new JTable(StockData,StockColumnNames);
+
+        JBtoevoegenProduct.addActionListener(this);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource()==JBtoevoegenProduct)
+        {
+            AddProduct addProduct = new AddProduct(this);
+        }
     }
 }

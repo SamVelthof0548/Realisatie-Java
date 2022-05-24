@@ -2,10 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="233e2c72-1d92-4178-8eb3-f35a8c4e6c4c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/MainApplication/AddProduct.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MainApplication/AddProduct.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MainApplication/ProductDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataBaseConnection/SQLMethods.java" beforeDir="false" afterPath="$PROJECT_DIR$/DataBaseConnection/SQLMethods.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Realisatie-Java/DataBaseConnection/SQLMethods.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Realisatie-Java/DataBaseConnection/SQLMethods.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Realisatie-Java/main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Realisatie-Java/main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MainApplication/StockPage.form" beforeDir="false" afterPath="$PROJECT_DIR$/MainApplication/StockPage.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MainApplication/StockPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/MainApplication/StockPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Realisatie-Java/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Realisatie-Java/.idea/uiDesigner.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Realisatie-Java/MainApplication/StockPage.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,6 +62,11 @@
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\liame\Documents\GitHub\Realisatie-Java\MainApplication" />
+    </key>
   </component>
   <component name="RunManager" selected="Application.main">
     <configuration name="RoutePage" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
