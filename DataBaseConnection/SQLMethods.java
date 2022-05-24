@@ -17,7 +17,7 @@ public class SQLMethods
         {
             String url = "jdbc:mysql://localhost/nerdygadgetsnl";
             String user = "root";
-            String password = "";
+            String password = "123456789";
 
             c = DriverManager.getConnection(url, user, password);
         }
@@ -163,6 +163,86 @@ public class SQLMethods
         }
         catch (Exception ex) {System.out.println(ex.getMessage());}
         return null;
+    }
+
+    public String[] ViewOrderDataRoutepage()
+    {
+        try
+        {
+            s = c.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            rs = s.executeQuery("SELECT o.OrderID, c.CustomerID, c.Address, c.PostalCode, c.PlaceOfResidence FROM orders AS o LEFT JOIN customers AS c on o.CustomerID = c.CustomerID WHERE o.status = 'Open' ORDER BY o.OrderID;");
+
+            int i = 0;
+
+            int rowCount = 0;
+            while (rs.next()) {
+                rowCount++;
+            }
+
+            rs.beforeFirst();
+
+            String[] data = new String[rowCount];
+
+            while (rs.next())
+            {
+                int orderID = rs.getInt("OrderID");
+                int customerID = rs.getInt("CustomerID");
+                String address = rs.getString("Address");
+                String postalCode = rs.getString("PostalCode");
+                String placeOfResidence = rs.getString("PlaceOfResidence");
+
+                data[i] = orderID + " " + customerID + " " + address + " " + postalCode + " " + placeOfResidence;
+
+                i++;
+            }
+
+            return data;
+        }
+        catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return new String[]{"Geen orders beschikbaar"};
+    }
+
+    public String[] ViewReturnDataRoutepage()
+    {
+        try
+        {
+            s = c.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            rs = s.executeQuery("SELECT o.OrderID, c.CustomerID, c.Address, c.PostalCode, c.PlaceOfResidence FROM orders AS o LEFT JOIN customers AS c on o.CustomerID = c.CustomerID ORDER BY o.OrderID;");
+
+            int i = 0;
+
+            int rowCount = 0;
+            while (rs.next()) {
+                rowCount++;
+            }
+
+            rs.beforeFirst();
+
+            String[] data = new String[rowCount];
+
+            while (rs.next())
+            {
+                int orderID = rs.getInt("OrderID");
+                int customerID = rs.getInt("CustomerID");
+                String address = rs.getString("Address");
+                String postalCode = rs.getString("PostalCode");
+                String placeOfResidence = rs.getString("PlaceOfResidence");
+
+                data[i] = orderID + " " + customerID + " " + address + " " + postalCode + " " + placeOfResidence;
+
+                i++;
+            }
+
+            return data;
+        }
+        catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return new String[]{"Geen orders beschikbaar"};
     }
 
 //    Functie om de data uit de returnorders tabel op te halen.
