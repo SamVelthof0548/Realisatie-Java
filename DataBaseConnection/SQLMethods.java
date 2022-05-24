@@ -27,15 +27,32 @@ public class SQLMethods
         }
     }
 
+    private int GetRowCount(ResultSet resultSet)
+    {
+        int rowCount = 0;
+        try
+        {
+            while (resultSet.next())
+            {
+                rowCount++;
+            }
+            resultSet.beforeFirst();
+            return rowCount;
+        }
+        catch (Exception ex) {System.out.println(ex.getMessage());}
+        return 0;
+    }
+
+
 //    Functie om de data uit de stockitems tabel op te halen.
     public String[][] ViewStockData()
     {
         try
         {
-            s = c.createStatement();
+            s = c.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             rs = s.executeQuery("SELECT * FROM stockitems AS si LEFT JOIN stockitemholdings AS sih ON si.StockItemID = sih.StockItemID;");
 
-            String[][] data = new String[5][9];
+            String[][] data = new String[GetRowCount(rs)][9];
 
             int i = 0;
             while (rs.next())
@@ -73,10 +90,10 @@ public class SQLMethods
     {
         try
         {
-            s = c.createStatement();
+            s = c.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             rs = s.executeQuery("SELECT * FROM customers;");
 
-            String[][] data = new String[5][11];
+            String[][] data = new String[GetRowCount(rs)][11];
 
             int i = 0;
             while (rs.next())
@@ -118,10 +135,10 @@ public class SQLMethods
     {
         try
         {
-            s = c.createStatement();
+            s = c.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             rs = s.executeQuery("SELECT * FROM orders;");
 
-            String[][] data = new String[10][6];
+            String[][] data = new String[GetRowCount(rs)][6];
 
             int i = 0;
             while (rs.next())
@@ -153,10 +170,10 @@ public class SQLMethods
     {
         try
         {
-            s = c.createStatement();
+            s = c.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             rs = s.executeQuery("SELECT * FROM returnorders;");
 
-            String[][] data = new String[3][6];
+            String[][] data = new String[GetRowCount(rs)][6];
 
             int i = 0;
             while (rs.next())

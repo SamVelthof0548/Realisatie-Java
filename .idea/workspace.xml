@@ -4,6 +4,7 @@
     <list default="true" id="233e2c72-1d92-4178-8eb3-f35a8c4e6c4c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DataBaseConnection/SQLMethods.java" beforeDir="false" afterPath="$PROJECT_DIR$/DataBaseConnection/SQLMethods.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Realisatie-Java/DataBaseConnection/SQLMethods.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Realisatie-Java/DataBaseConnection/SQLMethods.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Realisatie-Java/main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Realisatie-Java/main.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
