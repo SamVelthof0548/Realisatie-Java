@@ -1,34 +1,36 @@
 package MainApplication;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
-public class AddProduct extends JDialog implements ActionListener {
+public class AddProduct extends JDialog implements ActionListener{
     private JPanel contentPane;
     private JPanel buttons;
-    private JPanel labels_textfield;
+    private JPanel label_textfield;
     private JTextField JTproductNaam,JTproductGrootte,JTproductGewicht,JTeancode,JTbelastingpercentage,JTprijs,JTverkoopprijs;
-    private JLabel JLproductNaam,JLproductGrootte,JLproductGewicht,JLeancode,JLbelastingpercentage,JLprijs,JLverkooprijs;
+    private JLabel JLproductNaam,JLproductGrootte,JLproductGewicht,JLeancode,JLbelastingpercentage,JLprijs,JLverkoopprijs;
     private String productNaam,productGrootte,eancode;
     private double productGewicht,belastingpercentage,prijs,verkooprijs;
     private JPanel Panel1,Panel2,Panel3,Panel4,Panel5,Panel6,Panel7;
-    private JButton JBproductToevoegen;
-    private JButton JBannuleren;
+    private JButton JBtoevoegenProduct,JBannuleren;
 
-    public AddProduct(JFrame frame)
-    {
-        super(frame,true);
-        add(contentPane);
-        setTitle("Product Toevoegen");
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+    public AddProduct() {
+        setContentPane(contentPane);
+        setModal(true);
+        pack();
+
+        setDefaultCloseOperation(HIDE_ON_CLOSE);
         setVisible(true);
     }
+
+//    public static void main(String[] args) {
+//        AddProduct dialog = new AddProduct();
+//    }
 
     @Override
     public void actionPerformed(ActionEvent e)
     {
-        if (e.getSource()==JBproductToevoegen)
+        if (e.getSource()==JBtoevoegenProduct)
         {
             try
             {

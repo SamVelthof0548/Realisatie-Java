@@ -2,15 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="233e2c72-1d92-4178-8eb3-f35a8c4e6c4c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/MainApplication/AddProduct.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MainApplication/AddProduct.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MainApplication/ProductDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MainApplication/ProductAdd.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MainApplication/AddProduct.form" beforeDir="false" afterPath="$PROJECT_DIR$/MainApplication/AddProduct.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MainApplication/AddProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/MainApplication/AddProduct.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MainApplication/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/MainApplication/MainApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MainApplication/ProductDialog.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/MainApplication/StockPage.form" beforeDir="false" afterPath="$PROJECT_DIR$/MainApplication/StockPage.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MainApplication/StockPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/MainApplication/StockPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Realisatie-Java/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Realisatie-Java/.idea/uiDesigner.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Realisatie-Java/MainApplication/StockPage.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Realisatie-Java/MainApplication/MainApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Realisatie-Java/MainApplication/MainApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Realisatie-Java/MainApplication/ProductDialog.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +70,33 @@
       <recent name="C:\Users\liame\Documents\GitHub\Realisatie-Java\MainApplication" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.main">
+  <component name="RunManager" selected="Application.ProductAdd">
+    <configuration name="AddProduct" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="MainApplication.AddProduct" />
+      <module name="Realisatie-Java" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="MainApplication.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ProductAdd" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="MainApplication.ProductAdd" />
+      <module name="Realisatie-Java" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="MainApplication.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="RoutePage" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="MainApplication.RoutePage" />
       <module name="Realisatie-Java" />
@@ -91,7 +119,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.ProductAdd" />
         <item itemvalue="Application.main" />
+        <item itemvalue="Application.AddProduct" />
         <item itemvalue="Application.RoutePage" />
       </list>
     </recent_temporary>

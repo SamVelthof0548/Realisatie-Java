@@ -23,6 +23,7 @@ public class StockPage extends JPanel implements ActionListener
     {
         add(Voorraad);
         Voorraad.setPreferredSize(new Dimension(screenWidth, 500));
+        JBtoevoegenProduct.addActionListener(this);
         Voorraad.setVisible(true);
     }
 
@@ -36,14 +37,14 @@ public class StockPage extends JPanel implements ActionListener
 
         JTabelVoorraad = new JTable(StockData,StockColumnNames);
 
-        JBtoevoegenProduct.addActionListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource()==JBtoevoegenProduct)
         {
-            AddProduct addProduct = new AddProduct(this);
+            System.out.println("test");
+            ProductAdd addProduct = new ProductAdd(MainApplication.setframe);
         }
     }
 }
