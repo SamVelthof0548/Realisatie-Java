@@ -5,14 +5,17 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import DataBaseConnection.SQLMethods;
+
 public class ProductAdd extends JDialog implements ActionListener
 {
     private JPanel label_textfield,button;
-    private JTextField JTproductNaam,JTproductGrootte,JTproductGewicht,JTeancode,JTbelastingpercentage,JTprijs,JTverkoopprijs;
-    private JLabel JLproductNaam,JLproductGrootte,JLproductGewicht,JLeancode,JLbelastingpercentage,JLprijs,JLverkoopprijs;
+    private JTextField JTproductNaam,JTproductGrootte,JTproductGewicht,JTeancode,JTbelastingpercentage,JTprijs,JTverkoopprijs,JTvoorraad;
+    private JLabel JLproductNaam,JLproductGrootte,JLproductGewicht,JLeancode,JLbelastingpercentage,JLprijs,JLverkoopprijs,JLvoorraad;
     private JButton JBtoevoegenProduct,JBannuleren;
     private String productNaam,productGrootte,eancode;
     private double productGewicht,belastingpercentage,prijs,verkooprijs;
+    private int voorraad;
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     int screenHeight = screenSize.height;
     int screenWidth = screenSize.width;
@@ -25,23 +28,25 @@ public class ProductAdd extends JDialog implements ActionListener
         setTitle("Product Toevoegen");
         setDefaultCloseOperation(HIDE_ON_CLOSE);
 
-        label_textfield=new JPanel(new GridLayout(2,7));
+        label_textfield=new JPanel(new GridLayout(2,8));
 
-        label_textfield.add(JLproductNaam=new JLabel("Product Naam"));
-        label_textfield.add(JLproductGrootte=new JLabel("Product Grootte"));
-        label_textfield.add(JLproductGewicht=new JLabel("Product Gewicht"));
-        label_textfield.add(JLeancode=new JLabel("EAN-Code"));
-        label_textfield.add(JLbelastingpercentage=new JLabel("Belastingpercentage"));
-        label_textfield.add(JLprijs=new JLabel("Prijs"));
+        label_textfield.add(JLproductNaam=new JLabel("Productnaam"));
+        label_textfield.add(JLproductGrootte=new JLabel("Afmetingen"));
+        label_textfield.add(JLproductGewicht=new JLabel("Gewicht"));
+        label_textfield.add(JLeancode=new JLabel("Barcode"));
+        label_textfield.add(JLbelastingpercentage=new JLabel("Belastingtarief"));
+        label_textfield.add(JLprijs=new JLabel("Inkoopprijs"));
         label_textfield.add(JLverkoopprijs=new JLabel("Verkoopprijs"));
+        label_textfield.add(JLvoorraad=new JLabel("Voorraad"));
 
-        label_textfield.add(JTproductNaam=new JTextField(20));
-        label_textfield.add(JTproductGrootte=new JTextField(15));
-        label_textfield.add(JTproductGewicht=new JTextField(10));
-        label_textfield.add(JTeancode=new JTextField(20));
-        label_textfield.add(JTbelastingpercentage=new JTextField(10));
-        label_textfield.add(JTprijs=new JTextField(10));
-        label_textfield.add(JTverkoopprijs=new JTextField(10));
+        label_textfield.add(JTproductNaam=new JTextField());
+        label_textfield.add(JTproductGrootte=new JTextField());
+        label_textfield.add(JTproductGewicht=new JTextField());
+        label_textfield.add(JTeancode=new JTextField());
+        label_textfield.add(JTbelastingpercentage=new JTextField());
+        label_textfield.add(JTprijs=new JTextField());
+        label_textfield.add(JTverkoopprijs=new JTextField());
+        label_textfield.add(JTvoorraad=new JTextField());
 
         button=new JPanel(new GridLayout(1,2));
         button.setPreferredSize(new Dimension(screenWidth,100));
@@ -57,16 +62,13 @@ public class ProductAdd extends JDialog implements ActionListener
         setVisible(true);
     }
 
-    public static void main (String[] args)
-    {
-        ProductAdd productAdd = new ProductAdd(new JFrame());
-    }
-
     @Override
     public void actionPerformed(ActionEvent e)
     {
         if (e.getSource()==JBtoevoegenProduct)
         {
+            SQLMethods sql = new SQLMethods();
+            sql.CreateDataBaseConnection();
             try
             {
                 productNaam=JTproductNaam.getText();
@@ -76,11 +78,13 @@ public class ProductAdd extends JDialog implements ActionListener
                 belastingpercentage=Double.parseDouble(JTbelastingpercentage.getText());
                 prijs=Double.parseDouble(JTprijs.getText());
                 verkooprijs=Double.parseDouble(JTverkoopprijs.getText());
+                voorraad=Integer.parseInt(JTvoorraad.getText());
             }
             catch (NumberFormatException nfe)
             {
                 JOptionPane.showMessageDialog(null,"Vul bij gewicht, EAN-code, belastingspercentage, prijs en verkoopprijs een nummer in!","FOUT!!",JOptionPane.ERROR_MESSAGE);
             }
+            sql.addProduct(productNaam,productGrootte,productGewicht,eancode,belastingpercentage,prijs,verkooprijs,voorraad);
         }
         else if (e.getSource()==JBannuleren)
         {

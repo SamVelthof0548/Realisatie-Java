@@ -1,6 +1,7 @@
 package DataBaseConnection;
 
 import java.sql.*;
+import java.util.Calendar;
 
 public class SQLMethods
 {
@@ -198,5 +199,93 @@ public class SQLMethods
         }
         catch (Exception ex) {System.out.println(ex.getMessage());}
         return null;
+    }
+
+    //functie om de ingevulde waardes van een nieuw product in de database te zetten
+    public void addProduct(String productNaam,String productGrootte,double productGewicht,String eancode,double belastingpercentage,double prijs,double verkoopprijs,int voorraad)
+    {
+        try
+        {
+            Calendar calendar = Calendar.getInstance();
+            java.sql.Date date = new java.sql.Date(calendar.getTime().getTime());
+
+            String query="insert into stockitems (StockItemName,UnitSize,UnitWeight,EANCode,TaxRate,UnitPrice,UnitRetailPrice,LastEditedWhen)"
+                    + " values (?,?,?,?,?,?,?,?)";
+
+            PreparedStatement stmt = c.prepareStatement(query);
+            stmt.setString(1,productNaam);
+            stmt.setString(2,productGrootte);
+            stmt.setDouble(3,productGewicht);
+            stmt.setString(4,eancode);
+            stmt.setDouble(5,belastingpercentage);
+            stmt.setDouble(6,prijs);
+            stmt.setDouble(7,verkoopprijs);
+            stmt.setDate(8,date);
+
+            stmt.execute();
+            c.close();
+        }
+        catch (Exception ex) {System.out.println(ex.getMessage());}
+    }
+
+    //functie om de ingevulde waardes van een nieuwe klant in de database te zetten
+    //**deze functie is als een klant WEL een tussenvoegsel heeft**
+    public void addKlant(String geslacht,String voornaam,String tussenvoegsel,String achternaam,Date geboortedatum,String mailadres,String telefoonnummer,String adres,String postcode,String woonplaats)
+    {
+        try
+        {
+            Calendar calendar = Calendar.getInstance();
+            java.sql.Date date = new java.sql.Date(calendar.getTime().getTime());
+
+            String query="insert into customers (Sex,FirstName,Suffix,LastName,BirthDate,EmailAddress,MobilePhone,Address,PostalCode,PlaceOfResidence,LastEditedWhen)"
+                    + " values (?,?,?,?,?,?,?,?,?,?,?)";
+
+            PreparedStatement stmt = c.prepareStatement(query);
+            stmt.setString(1,geslacht);
+            stmt.setString(2,voornaam);
+            stmt.setString(3,tussenvoegsel);
+            stmt.setString(4,achternaam);
+            stmt.setDate(5,geboortedatum);
+            stmt.setString(6,mailadres);
+            stmt.setString(7,telefoonnummer);
+            stmt.setString(8,adres);
+            stmt.setString(9,postcode);
+            stmt.setString(10,woonplaats);
+            stmt.setDate(11,date);
+
+            stmt.execute();
+            c.close();
+        }
+        catch (Exception ex) {System.out.println(ex.getMessage());}
+    }
+
+    //functie om de ingevulde waardes van een nieuwe klant in de database te zetten
+    //**deze functie is als een klant NIET een tussenvoegsel heeft**
+    public void addKlant1(String geslacht,String voornaam,String achternaam,Date geboortedatum,String mailadres,String telefoonnummer,String adres,String postcode,String woonplaats)
+    {
+        try
+        {
+            Calendar calendar = Calendar.getInstance();
+            java.sql.Date date = new java.sql.Date(calendar.getTime().getTime());
+
+            String query="insert into customers (Sex,FirstName,Suffix,LastName,BirthDate,EmailAddress,MobilePhone,Address,PostalCode,PlaceOfResidence,LastEditedWhen)"
+                    + " values (?,?,?,?,?,?,?,?,?,?,?)";
+
+            PreparedStatement stmt = c.prepareStatement(query);
+            stmt.setString(1,geslacht);
+            stmt.setString(2,voornaam);
+            stmt.setString(3,achternaam);
+            stmt.setDate(4,geboortedatum);
+            stmt.setString(5,mailadres);
+            stmt.setString(6,telefoonnummer);
+            stmt.setString(7,adres);
+            stmt.setString(8,postcode);
+            stmt.setString(9,woonplaats);
+            stmt.setDate(10,date);
+
+            stmt.execute();
+            c.close();
+        }
+        catch (Exception ex) {System.out.println(ex.getMessage());}
     }
 }
