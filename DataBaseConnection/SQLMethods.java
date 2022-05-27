@@ -1,5 +1,6 @@
 package DataBaseConnection;
 
+import javax.swing.*;
 import java.sql.*;
 
 public class SQLMethods
@@ -17,7 +18,7 @@ public class SQLMethods
         {
             String url = "jdbc:mysql://localhost/nerdygadgetsnl";
             String user = "root";
-            String password = "";
+            String password = "123456789";
 
             c = DriverManager.getConnection(url, user, password);
         }
@@ -165,14 +166,15 @@ public class SQLMethods
         return null;
     }
 
-    public String[] ViewOrderDataRoutepage()
+    public DefaultListModel ViewOrderDataRoutepage()
     {
         try
         {
             s = c.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             rs = s.executeQuery("SELECT o.OrderID, c.CustomerID, c.Address, c.PostalCode, c.PlaceOfResidence FROM orders AS o LEFT JOIN customers AS c on o.CustomerID = c.CustomerID WHERE o.status = 'Open' ORDER BY o.OrderID;");
 
-            String[] data = new String[GetRowCount(rs)];
+
+            DefaultListModel model = new DefaultListModel();
 
             int i = 0;
             while (rs.next())
@@ -183,18 +185,16 @@ public class SQLMethods
                 String postalCode = rs.getString("PostalCode");
                 String placeOfResidence = rs.getString("PlaceOfResidence");
 
-                data[i] = orderID + " " + customerID + " " + address + " " + postalCode + " " + placeOfResidence;
+                model.addElement(orderID + ", " + placeOfResidence + ", " + postalCode + ", " + address);
 
                 i++;
             }
-
-            return data;
+            return model;
         }
         catch (Exception ex) {
             System.out.println(ex.getMessage());
+            return null;
         }
-
-        return new String[]{"Geen orders beschikbaar"};
     }
 
     public String[] ViewReturnDataRoutepage()
