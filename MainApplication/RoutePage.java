@@ -1,11 +1,9 @@
 package MainApplication;
 
 import DataBaseConnection.SQLMethods;
-
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
+import MainApplication.routepainter.RoutePainter;
 import kong.unirest.HttpResponse;
 import kong.unirest.JsonNode;
 import kong.unirest.Unirest;
@@ -18,19 +16,28 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import javax.swing.DefaultListModel;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+
+import org.jxmapviewer.JXMapViewer;
+import org.jxmapviewer.OSMTileFactoryInfo;
+import org.jxmapviewer.painter.CompoundPainter;
+import org.jxmapviewer.painter.Painter;
+import org.jxmapviewer.viewer.DefaultTileFactory;
+import org.jxmapviewer.viewer.GeoPosition;
+import org.jxmapviewer.viewer.TileFactoryInfo;
+
 
 public class RoutePage extends JPanel implements ActionListener {
     private JButton button1;
     private JPanel Routebepaling;
     private JLabel labelRoutebepaling;
-    private JPanel RouteContent;
-    private JPanel RouteMap;
-    private JPanel RouteScroll;
-    private JScrollPane scrollReturns;
-    private JScrollPane scrollOrders;
+    private JPanel RouteContent, RouteMap, RouteScroll;
+    private JScrollPane scrollReturns, scrollOrders;
     private JList orderlist;
-    private ArrayList<String> geolocations;
+    private ArrayList<double[]> geolocations;
+    private ArrayList<GeoPosition> geopositions;
+    private ArrayList<GeoPosition> coordWaypoints;
 
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     int screenHeight = screenSize.height;
@@ -65,10 +72,13 @@ public class RoutePage extends JPanel implements ActionListener {
             String input = String.valueOf(order);
             geolocations.add(getGeolocation(input));
         }
+
+        createRouting();
     }
 
-    public String getGeolocation(String zipcode)
+    public double[] getGeolocation(String zipcode)
     {
+        double[] coords = new double[2];
         HttpResponse<JsonNode> result;
         String apikey = "6c4a4b27-9322-4060-b108-0f68c74da030";
         result = Unirest.get("https://graphhopper.com/api/1/geocode?q="+zipcode+"&locale=en&debug=true&key="+apikey).asJson();
@@ -76,9 +86,48 @@ public class RoutePage extends JPanel implements ActionListener {
         JSONArray hits = result.getBody().getObject().getJSONArray("hits");
         JSONObject hits1 = hits.getJSONObject(0);
         JSONObject point = hits1.getJSONObject("point");
-        String lat = point.getString("lat");
-        String lng = point.getString("lng");
+        coords[0] = Double.parseDouble(point.getString("lat"));
+        coords[1] = Double.parseDouble(point.getString("lng"));
 
-        return lat+", "+lng;
+        return coords;
+    }
+
+    public void createRouting(){
+        JXMapViewer mapViewer = new JXMapViewer();
+
+        // Display the viewer in a JFrame
+        JFrame frame = new JFrame("JXMapviewer2 Example 2");
+        frame.getContentPane().add(mapViewer);
+        frame.setSize(800, 600);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+
+        // Create a TileFactoryInfo for OpenStreetMap
+        TileFactoryInfo info = new OSMTileFactoryInfo();
+        DefaultTileFactory tileFactory = new DefaultTileFactory(info);
+        mapViewer.setTileFactory(tileFactory);
+
+        // add coordinates to geopositions arraylist
+        geopositions = new ArrayList<>();
+        for (double[] coords : geolocations) {
+            geopositions.add(new GeoPosition(coords));
+        }
+
+        // Create a track from the geo-positions
+        java.util.List<GeoPosition> track = geopositions;
+        RoutePainter routePainter = new RoutePainter(track);
+
+        // Set the focus
+        mapViewer.zoomToBestFit(new HashSet<GeoPosition>(track), 0.7);
+
+        coordWaypoints = new ArrayList<>();
+        coordWaypoints.addAll(geopositions);
+
+        // Create a compound painter that uses both the route-painter and the waypoint-painter
+        List<Painter<JXMapViewer>> painters = new ArrayList<>();
+        painters.add(routePainter);
+
+        CompoundPainter<JXMapViewer> painter = new CompoundPainter<JXMapViewer>(painters);
+        mapViewer.setOverlayPainter(painter);
     }
 }
