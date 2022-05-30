@@ -14,7 +14,6 @@ public class MainApplication extends JFrame implements ActionListener{
     private CustomerPage customerPage;
     private OrderPage orderPage;
     private ReturnPage returnPage;
-    private AddProduct addProductPage;
     static JFrame setframe;
 
     public MainApplication()

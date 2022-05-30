@@ -3,13 +3,18 @@ package MainApplication;
 import DataBaseConnection.SQLMethods;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class OrderPage extends JPanel
+import static MainApplication.MainApplication.setframe;
+
+public class OrderPage extends JPanel implements ActionListener
 {
     private JPanel Orders;
     private JLabel labelOrders;
     private JScrollPane ordersWeergeven;
     private JTable JTabelOrders;
+    private JButton JBtoevoegenOrders;
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     int screenHeight = screenSize.height;
     int screenWidth = screenSize.width;
@@ -18,6 +23,7 @@ public class OrderPage extends JPanel
     {
         add(Orders);
         Orders.setPreferredSize(new Dimension(screenWidth, 500));
+        JBtoevoegenOrders.addActionListener(this);
         Orders.setVisible(true);
     }
 
@@ -30,5 +36,13 @@ public class OrderPage extends JPanel
         String[][] OrderData = sql.ViewOrderData();
 
         JTabelOrders = new JTable(OrderData,OrderColumnNames);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource()==JBtoevoegenOrders)
+        {
+            OrderAdd orderAdd = new OrderAdd(setframe);
+        }
     }
 }

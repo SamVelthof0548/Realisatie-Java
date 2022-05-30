@@ -35,7 +35,7 @@
         </constraints>
         <properties>
           <foreground color="-16759365"/>
-          <text value="Product Toevoegen"/>
+          <text value="Toevoegen Product"/>
         </properties>
       </component>
       <hspacer id="c49d7">

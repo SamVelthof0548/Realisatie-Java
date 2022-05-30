@@ -7,6 +7,8 @@ import java.awt.event.ActionListener;
 
 import DataBaseConnection.SQLMethods;
 
+import static MainApplication.MainApplication.setframe;
+
 
 public class StockPage extends JPanel implements ActionListener
 {
@@ -43,8 +45,7 @@ public class StockPage extends JPanel implements ActionListener
     public void actionPerformed(ActionEvent e) {
         if (e.getSource()==JBtoevoegenProduct)
         {
-            System.out.println("test");
-            ProductAdd addProduct = new ProductAdd(MainApplication.setframe);
+            ProductAdd productAdd = new ProductAdd(setframe);
         }
     }
 }
