@@ -206,11 +206,8 @@ public class SQLMethods
     {
         try
         {
-            Calendar calendar = Calendar.getInstance();
-            java.sql.Date date = new java.sql.Date(calendar.getTime().getTime());
-
             String query="insert into stockitems (StockItemName,UnitSize,UnitWeight,EANCode,TaxRate,UnitPrice,UnitRetailPrice,LastEditedWhen)"
-                    + " values (?,?,?,?,?,?,?,?)";
+                    + " values (?,?,?,?,?,?,?,current_timestamp())";
 
             PreparedStatement stmt = c.prepareStatement(query);
             stmt.setString(1,productNaam);
@@ -220,7 +217,6 @@ public class SQLMethods
             stmt.setDouble(5,belastingpercentage);
             stmt.setDouble(6,prijs);
             stmt.setDouble(7,verkoopprijs);
-            stmt.setDate(8,date);
 
             stmt.execute();
             c.close();
@@ -234,11 +230,8 @@ public class SQLMethods
     {
         try
         {
-            Calendar calendar = Calendar.getInstance();
-            java.sql.Date date = new java.sql.Date(calendar.getTime().getTime());
-
             String query="insert into customers (Sex,FirstName,Suffix,LastName,BirthDate,EmailAddress,MobilePhone,Address,PostalCode,PlaceOfResidence,LastEditedWhen)"
-                    + " values (?,?,?,?,?,?,?,?,?,?,?)";
+                    + " values (?,?,?,?,?,?,?,?,?,?,current_timestamp())";
 
             PreparedStatement stmt = c.prepareStatement(query);
             stmt.setString(1,geslacht);
@@ -251,7 +244,6 @@ public class SQLMethods
             stmt.setString(8,adres);
             stmt.setString(9,postcode);
             stmt.setString(10,woonplaats);
-            stmt.setDate(11,date);
 
             stmt.execute();
             c.close();
@@ -265,11 +257,8 @@ public class SQLMethods
     {
         try
         {
-            Calendar calendar = Calendar.getInstance();
-            java.sql.Date date = new java.sql.Date(calendar.getTime().getTime());
-
             String query="insert into customers (Sex,FirstName,Suffix,LastName,BirthDate,EmailAddress,MobilePhone,Address,PostalCode,PlaceOfResidence,LastEditedWhen)"
-                    + " values (?,?,?,?,?,?,?,?,?,?,?)";
+                    + " values (?,?,?,?,?,?,?,?,?,?,current_timestamp())";
 
             PreparedStatement stmt = c.prepareStatement(query);
             stmt.setString(1,geslacht);
@@ -281,7 +270,46 @@ public class SQLMethods
             stmt.setString(7,adres);
             stmt.setString(8,postcode);
             stmt.setString(9,woonplaats);
-            stmt.setDate(10,date);
+
+            stmt.execute();
+            c.close();
+        }
+        catch (Exception ex) {System.out.println(ex.getMessage());}
+    }
+
+    public void addOrder(int klantID,Date orderdatum,Date verwachtLeverdatum,String opmerkingen)
+    {
+        try
+        {
+            String query="insert into orders (CustomerID, OrderDate, ExpectedDeliveryDate, Comments, Status, LastEditedWhen)"
+                    + " values (?,?,?,?,?,current_timestamp())";
+
+            PreparedStatement stmt = c.prepareStatement(query);
+            stmt.setInt(1,klantID);
+            stmt.setDate(2,orderdatum);
+            stmt.setDate(3,verwachtLeverdatum);
+            stmt.setString(4,opmerkingen);
+            stmt.setString(5,"Open");
+
+            stmt.execute();
+            c.close();
+        }
+        catch (Exception ex) {System.out.println(ex.getMessage());}
+    }
+
+    public void addReturn(int orderID,int klantID,Date retourdatum,String opmerkingen)
+    {
+        try
+        {
+            String query="insert into returnorders (OrderID, CustomerID, ReturnOrderDate, Comments, Status, LastEditedWhen)"
+                    + " values (?,?,?,?,?,current_timestamp())";
+
+            PreparedStatement stmt = c.prepareStatement(query);
+            stmt.setInt(1,orderID);
+            stmt.setInt(2,klantID);
+            stmt.setDate(3,retourdatum);
+            stmt.setString(4,opmerkingen);
+            stmt.setString(5,"Open");
 
             stmt.execute();
             c.close();

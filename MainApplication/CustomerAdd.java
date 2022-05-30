@@ -29,7 +29,7 @@ public class CustomerAdd extends JDialog implements ActionListener
         setLayout(new GridLayout(2,1));
         pack();
         setSize(new Dimension((screenWidth), 200));
-        setTitle("Product Toevoegen");
+        setTitle("Klant Toevoegen");
         setDefaultCloseOperation(HIDE_ON_CLOSE);
 
         label_textfield=new JPanel(new GridLayout(2,10));
@@ -106,6 +106,7 @@ public class CustomerAdd extends JDialog implements ActionListener
             {
                 sql.addKlant1(geslacht,voornaam,achternaam, (java.sql.Date)geboortedatum,mailadres,telefoonnummer,adres,postcode,woonplaats);
             }
+            setVisible(false);
         }
         else if (e.getSource()==JBannuleren)
         {

@@ -85,6 +85,7 @@ public class ProductAdd extends JDialog implements ActionListener
                 JOptionPane.showMessageDialog(null,"Vul bij gewicht, EAN-code, belastingspercentage, prijs en verkoopprijs een nummer in!","FOUT!!",JOptionPane.ERROR_MESSAGE);
             }
             sql.addProduct(productNaam,productGrootte,productGewicht,eancode,belastingpercentage,prijs,verkooprijs,voorraad);
+            setVisible(false);
         }
         else if (e.getSource()==JBannuleren)
         {
