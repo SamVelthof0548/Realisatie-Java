@@ -23,6 +23,7 @@ public class CustomerAdd extends JDialog implements ActionListener
     int screenWidth = screenSize.width;
     static Date formatGBD;
     static boolean tussenvoegselboolean;
+    static boolean gelukt;
 
     public CustomerAdd(JFrame frame){
         super(frame,true);
@@ -93,10 +94,12 @@ public class CustomerAdd extends JDialog implements ActionListener
                 adres=JTadres.getText();
                 postcode=JTpostcode.getText();
                 woonplaats=JTwoonplaats.getText();
+                gelukt=true;
             }
             catch (ParseException pe)
             {
                 JOptionPane.showMessageDialog(null,"Vul geboortedatum in als dd/mm/yyyy!","FOUT!!",JOptionPane.ERROR_MESSAGE);
+                gelukt=false;
             }
             if (tussenvoegselboolean)
             {
@@ -106,7 +109,10 @@ public class CustomerAdd extends JDialog implements ActionListener
             {
                 sql.addKlant1(geslacht,voornaam,achternaam, (java.sql.Date)geboortedatum,mailadres,telefoonnummer,adres,postcode,woonplaats);
             }
-            setVisible(false);
+            if (gelukt)
+            {
+                setVisible(false);
+            }
         }
         else if (e.getSource()==JBannuleren)
         {

@@ -19,6 +19,7 @@ public class ProductAdd extends JDialog implements ActionListener
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     int screenHeight = screenSize.height;
     int screenWidth = screenSize.width;
+    static boolean gelukt;
 
     public ProductAdd(JFrame frame){
         super(frame,true);
@@ -79,13 +80,18 @@ public class ProductAdd extends JDialog implements ActionListener
                 prijs=Double.parseDouble(JTprijs.getText());
                 verkooprijs=Double.parseDouble(JTverkoopprijs.getText());
                 voorraad=Integer.parseInt(JTvoorraad.getText());
+                gelukt=true;
             }
             catch (NumberFormatException nfe)
             {
                 JOptionPane.showMessageDialog(null,"Vul bij gewicht, EAN-code, belastingspercentage, prijs en verkoopprijs een nummer in!","FOUT!!",JOptionPane.ERROR_MESSAGE);
+                gelukt=false;
             }
             sql.addProduct(productNaam,productGrootte,productGewicht,eancode,belastingpercentage,prijs,verkooprijs,voorraad);
-            setVisible(false);
+            if (gelukt)
+            {
+                setVisible(false);
+            }
         }
         else if (e.getSource()==JBannuleren)
         {

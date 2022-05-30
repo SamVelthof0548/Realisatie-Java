@@ -23,6 +23,7 @@ public class ReturnAdd extends JDialog implements ActionListener
     int screenHeight = screenSize.height;
     int screenWidth = screenSize.width;
     static Date formatDate;
+    static boolean gelukt;
 
     public ReturnAdd(JFrame frame){
         super(frame,true);
@@ -79,13 +80,18 @@ public class ReturnAdd extends JDialog implements ActionListener
                     JOptionPane.showMessageDialog(null,"Vul retourdatum in als dd/mm/yyyy!","FOUT!!",JOptionPane.ERROR_MESSAGE);
                 }
                 opmerkingen=JTopmerkingen.getText();
+                gelukt=true;
             }
             catch (NumberFormatException nfe)
             {
+                gelukt=false;
                 JOptionPane.showMessageDialog(null,"Vul bij orderID en klantID een getal in!","FOUT!!",JOptionPane.ERROR_MESSAGE);
             }
             sql.addReturn(orderID,klantID,retourdatum,opmerkingen);
-            setVisible(false);
+            if (gelukt)
+            {
+                setVisible(false);
+            }
         }
         else if (e.getSource()==JBannuleren)
         {

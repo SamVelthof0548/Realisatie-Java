@@ -23,6 +23,7 @@ public class OrderAdd extends JDialog implements ActionListener
     int screenHeight = screenSize.height;
     int screenWidth = screenSize.width;
     static Date formatDate;
+    static boolean gelukt;
 
     public OrderAdd(JFrame frame){
         super(frame,true);
@@ -80,13 +81,18 @@ public class OrderAdd extends JDialog implements ActionListener
                     JOptionPane.showMessageDialog(null,"Vul orderdatum en verwachte leverdatum in als dd/mm/yyyy!","FOUT!!",JOptionPane.ERROR_MESSAGE);
                 }
                 opmerkingen=JTopmerkingen.getText();
+                gelukt=true;
             }
             catch (NumberFormatException nfe)
             {
+                gelukt=false;
                 JOptionPane.showMessageDialog(null,"Vul bij klantID een getal in!","FOUT!!",JOptionPane.ERROR_MESSAGE);
             }
             sql.addOrder(klantID,orderdatum,verwachteLeverdatum,opmerkingen);
-            setVisible(false);
+            if (gelukt)
+            {
+                setVisible(false);
+            }
         }
         else if (e.getSource()==JBannuleren)
         {

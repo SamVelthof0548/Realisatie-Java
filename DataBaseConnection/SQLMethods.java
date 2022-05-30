@@ -219,6 +219,21 @@ public class SQLMethods
             stmt.setDouble(7,verkoopprijs);
 
             stmt.execute();
+
+//            String query1="select StockItemID from stockitems where EANCode = ?";
+//
+//            PreparedStatement stmt1 = c.prepareStatement(query);
+//            stmt1.setString(1,eancode);
+
+            String query2="insert into stockitemholdings (StockItemID,QuantityOnHand,LastEditedWhen)"
+                    + " values (?,?,current_timestamp())";
+
+//            PreparedStatement stmt2 = c.prepareStatement(query2);
+//            stmt.setInt(1,);
+//            stmt.setInt(2,voorraad);
+//
+//            stmt2.execute();
+
             c.close();
         }
         catch (Exception ex) {System.out.println(ex.getMessage());}
@@ -263,13 +278,14 @@ public class SQLMethods
             PreparedStatement stmt = c.prepareStatement(query);
             stmt.setString(1,geslacht);
             stmt.setString(2,voornaam);
-            stmt.setString(3,achternaam);
-            stmt.setDate(4,geboortedatum);
-            stmt.setString(5,mailadres);
-            stmt.setString(6,telefoonnummer);
-            stmt.setString(7,adres);
-            stmt.setString(8,postcode);
-            stmt.setString(9,woonplaats);
+            stmt.setString(3,"");
+            stmt.setString(4,achternaam);
+            stmt.setDate(5,geboortedatum);
+            stmt.setString(6,mailadres);
+            stmt.setString(7,telefoonnummer);
+            stmt.setString(8,adres);
+            stmt.setString(9,postcode);
+            stmt.setString(10,woonplaats);
 
             stmt.execute();
             c.close();
