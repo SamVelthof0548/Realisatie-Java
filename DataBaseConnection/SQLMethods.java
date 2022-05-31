@@ -518,4 +518,41 @@ public class SQLMethods
         }
         catch (Exception ex) {System.out.println(ex.getMessage());}
     }
+
+    public String hoeveelheid,productid;
+    public void getOrderlineData(int ordernr)
+    {
+        try
+        {
+            s = c.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            rs = s.executeQuery("select * from orderlines WHERE OrderlineID="+ordernr);
+
+            while (rs.next())
+            {
+                productid = rs.getString("StockItemID");
+                hoeveelheid = rs.getString("Quantity");
+            }
+        }
+        catch (Exception ex)
+        {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public void updateOrderlines(int orderlinenr,int productid,int hoeveelheid)
+    {
+        try
+        {
+            String query="UPDATE orderlines SET StockItemID=?,Quantity=?,LastEditedWhen=current_timestamp() WHERE OrderlineID="+orderlinenr;
+
+            PreparedStatement stmt = c.prepareStatement(query);
+            stmt.setInt(1,productid);
+            stmt.setInt(2,hoeveelheid);
+
+            stmt.execute();
+
+            c.close();
+        }
+        catch (Exception ex) {System.out.println(ex.getMessage());}
+    }
 }
