@@ -84,7 +84,7 @@ public class ProductAdd extends JDialog implements ActionListener
             }
             catch (NumberFormatException nfe)
             {
-                JOptionPane.showMessageDialog(null,"Vul bij gewicht, EAN-code, belastingspercentage, prijs en verkoopprijs een nummer in!","FOUT!!",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null,"Vul bij gewicht, EAN-code, belastingspercentage, prijs en verkoopprijs een getal in!","FOUT!!",JOptionPane.ERROR_MESSAGE);
                 gelukt=false;
             }
             sql.addProduct(productNaam,productGrootte,productGewicht,eancode,belastingpercentage,prijs,verkooprijs,voorraad);

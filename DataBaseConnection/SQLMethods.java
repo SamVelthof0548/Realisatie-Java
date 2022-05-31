@@ -305,7 +305,6 @@ public class SQLMethods
 
             stmt2.execute();
 
-            ViewStockData();
             c.close();
         }
         catch (Exception ex) {System.out.println(ex.getMessage());}
@@ -411,7 +410,7 @@ public class SQLMethods
         try
         {
             s = c.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            rs = s.executeQuery("select s.StockItemName,s.UnitSize,s.UnitWeight,s.EANCode,s.TaxRate,s.UnitPrice,s.UnitRetailPrice,sh.QuantityOnHand from stockitems as s join stockitemholdings as sh on s.StockItemID = sh.StockItemID where ProductID ="+productnummer+";");
+            rs = s.executeQuery("select s.StockItemName,s.UnitSize,s.UnitWeight,s.EANCode,s.TaxRate,s.UnitPrice,s.UnitRetailPrice,sh.QuantityOnHand from stockitems as s join stockitemholdings as sh on s.StockItemID = sh.StockItemID where s.StockItemID ="+productnummer);
 
             while (rs.next())
             {
@@ -424,11 +423,49 @@ public class SQLMethods
                 verkoopprijs = rs.getString("UnitRetailPrice");
                 voorraad = rs.getString("QuantityOnHand");
             }
+            System.out.println(productnaam);
         }
         catch (Exception ex)
         {
             System.out.println(ex.getMessage());
         }
+    }
+
+    public void updateProduct(int productnummer,String naam,String grootte,double gewicht,String eancode,double belastingpercentage,double inkoopprijs, double verkoopprijs,int voorraad)
+    {
+        try
+        {
+            String query="update stockitems set StockItemName=?,UnitSize=?,UnitWeight=?,EANCode=?,TaxRate=?,UnitPrice=?,UnitRetailPrice=?,LastEditedWhen=current_timestamp() where StockItemID="+productnummer+";";
+
+            PreparedStatement stmt = c.prepareStatement(query);
+            stmt.setString(1,naam);
+            stmt.setString(2,grootte);
+            stmt.setDouble(3,gewicht);
+            stmt.setString(4,eancode);
+            stmt.setDouble(5,belastingpercentage);
+            stmt.setDouble(6,inkoopprijs);
+            stmt.setDouble(7,verkoopprijs);
+
+            stmt.execute();
+
+            rs  = stmt.getGeneratedKeys();
+            int result = 0;
+            if (rs.next())
+            {
+                result=rs.getInt(1);
+            }
+
+            String query2="update stockitemholdings set StockItemID=?,QuantityOnHand=?,LastEditedWhen=current_timestamp() where StockItemID="+productnummer+";";
+
+            PreparedStatement stmt2 = c.prepareStatement(query2);
+            stmt2.setInt(1,productnummer);
+            stmt2.setInt(2,voorraad);
+
+            stmt2.execute();
+
+            c.close();
+        }
+        catch (Exception ex) {System.out.println(ex.getMessage());}
     }
 
 }

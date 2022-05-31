@@ -1,31 +1,31 @@
-package MainApplication;
+package MainApplication.CustomerChange;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ProductChangeDialog extends JDialog implements ActionListener {
+public class CustomerChangeDialog extends JDialog implements ActionListener {
     JButton JBoke;
-    JTextField JTproductID;
+    JTextField JTcustomerID;
     JLabel JLvraag;
     static JFrame frame;
-    private int productnummer;
+    private int klantnummer;
     static boolean gelukt;
 
-    public ProductChangeDialog(JFrame frame)
+    public CustomerChangeDialog(JFrame frame)
     {
         super(frame,true);
-        this.frame=frame;
-        setTitle("Product Wijzigen");
+        pack();
+        CustomerChangeDialog.frame=frame;
+        setTitle("Klant Wijzigen");
         setLayout(new GridLayout(3,1));
         setDefaultCloseOperation(HIDE_ON_CLOSE);
-        pack();
         setSize(new Dimension(600, 200));
         setLocationRelativeTo(null);
 
-        add(JLvraag=new JLabel("Productnummer van het te wijzigen product"));
-        add(JTproductID=new JTextField(10));
+        add(JLvraag=new JLabel("Klantnummer van het te wijzigen product"));
+        add(JTcustomerID =new JTextField(10));
         add(JBoke=new JButton("Oké"));
         JBoke.addActionListener(this);
         setVisible(true);
@@ -37,17 +37,17 @@ public class ProductChangeDialog extends JDialog implements ActionListener {
         {
             try
             {
-                productnummer=Integer.parseInt(JTproductID.getText());
+                klantnummer =Integer.parseInt(JTcustomerID.getText());
                 gelukt=true;
             }
             catch (NumberFormatException nfe)
             {
-                JOptionPane.showMessageDialog(null,"Productnummer moet een getal zijn!","FOUT!!",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null,"Klantnummer moet een getal zijn!","FOUT!!",JOptionPane.ERROR_MESSAGE);
                 gelukt=false;
             }
             if (gelukt)
             {
-                ProductChange productChange = new ProductChange(frame,productnummer);
+                CustomerChange customerChange = new CustomerChange(frame, klantnummer);
                 setVisible(false);
             }
         }

@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import DataBaseConnection.SQLMethods;
+import MainApplication.ProductChange.ProductChangeDialog;
 
 import static MainApplication.MainApplication.setframe;
 
