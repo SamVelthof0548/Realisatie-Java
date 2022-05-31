@@ -3,6 +3,8 @@ package MainApplication;
 import DataBaseConnection.SQLMethods;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class OrderPage extends JPanel
 {
@@ -30,5 +32,20 @@ public class OrderPage extends JPanel
         String[][] OrderData = sql.ViewOrderData();
 
         JTabelOrders = new JTable(OrderData,OrderColumnNames);
+        JTabelOrders.setDefaultEditor(Object.class, null);
+        JTabelOrders.addMouseListener(new MouseAdapter()
+        {
+            @Override
+            public void mousePressed(MouseEvent e)
+            {
+                if (e.getClickCount() == 2)
+                {
+                    int row = JTabelOrders.getSelectedRow();
+                    Object OrderID = JTabelOrders.getValueAt(row,0);
+                    OrderLines o = new OrderLines(OrderID);
+
+                }
+            }
+        });
     }
 }
