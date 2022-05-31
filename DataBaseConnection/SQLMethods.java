@@ -348,7 +348,24 @@ public class SQLMethods
         try
         {
             s = c.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            rs = s.executeQuery("SELECT r.ReturnOrderID");
+            rs = s.executeQuery("SELECT r.ReturnOrderID, r.OrderID, r.CustomerID, r.ReturnOrderDate, r.Status, c.FirstName, c.Suffix, c.LastName, c.EmailAddress, c.MobilePhone, c.Address, c.PostalCode, c.PlaceOfResidence FROM returnorders AS r JOIN customers AS c on r.CustomerID = c.CustomerID WHERE r.ReturnOrderID="+returnOrderID+";");
+
+            while (rs.next())
+            {
+                returnOrderID_r = rs.getString("ReturnOrderID");
+                orderID_r = rs.getString("OrderID");
+                customerID_r = rs.getString( "CustomerID");
+                returnOrderDate = rs.getString("ReturnOrderDate");
+                status_r = rs.getString("Status");
+                firstName_r = rs.getString("FirstName");
+                suffix_r = rs.getString("Suffix");
+                lastName_r = rs.getString("LastName");
+                emailAddress_r = rs.getString("EmailAddress");
+                mobilePhone_r = rs.getString("MobilePhone");
+                address_r = rs.getString("Address");
+                postalCode_r = rs.getString("PostalCode");
+                placeOfResidence_r = rs.getString("PlaceOfResidence");
+            }
         }
         catch (Exception ex)
         {
