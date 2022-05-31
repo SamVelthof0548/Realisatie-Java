@@ -337,8 +337,44 @@ public class SQLMethods
         }
     }
 
-    public String[][] viewReturnOrderLinesData()
+    public String[][] viewReturnOrderLinesData(Object returnOrderID)
     {
+        try
+        {
+            s = c.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            rs = s.executeQuery("SELECT rl.ReturnOrderLineID, rl.ReturnOrderID, s.StockItemID, s.StockItemName, rl.Quantity, s.EANCode, s.TaxRate, s.UnitRetailPrice FROM returnorderlines AS rl JOIN stockitems AS s ON rl.StockItemID = s.StockItemID WHERE rl.ReturnOrderID="+returnOrderID+";");
+
+            String[][] data = new String[GetRowCount(rs)][8];
+
+            int i = 0;
+            int aantalResultaten = 1;
+            while (rs.next())
+            {
+                int stockItemID = rs.getInt("StockItemID");
+                String stockItemName = rs.getString("StockItemName");
+                int quantity = rs.getInt("Quantity");
+                String eanCode = rs.getString("EANCode");
+                float taxRate = rs.getFloat("TaxRate");
+                float unitRetailPrice = rs.getFloat("UnitRetailPrice");
+
+                data[i][0] = aantalResultaten+"";
+                data[i][1] = stockItemID+"";
+                data[i][2] = stockItemName;
+                data[i][3] = quantity+"";
+                data[i][4] = eanCode;
+                data[i][5] = taxRate+"%";
+                data[i][6] = "€"+unitRetailPrice;
+                data[i][7] = "€"+(unitRetailPrice*quantity);
+
+                i++;
+                aantalResultaten++;
+            }
+            return data;
+        }
+        catch (Exception ex)
+        {
+            System.out.println(ex.getMessage());
+        }
         return null;
     }
 

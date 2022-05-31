@@ -52,9 +52,9 @@ public class OrderLines extends JFrame
 
         String[][] OrderLinesData = sqlMethods.viewOrderLinesData(orderID);
         String[] OrderLinesColumns = {"","Productnummer","Omschrijving","Aantal","Barcode","BTW","Prijs per stuk","Prijs"};
-        JTable OrderLinesTabel = new JTable(OrderLinesData, OrderLinesColumns);
+        JTable OrderLinesTable = new JTable(OrderLinesData, OrderLinesColumns);
 
-        JScrollPane PTable = new JScrollPane(OrderLinesTabel);
+        JScrollPane PTable = new JScrollPane(OrderLinesTable);
 
         add(PData);
         add(PTable);
