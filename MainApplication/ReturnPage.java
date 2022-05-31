@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import DataBaseConnection.SQLMethods;
 
@@ -37,6 +39,20 @@ public class ReturnPage extends JPanel implements ActionListener
         String[][] ReturnData = sql.ViewReturnData();
 
         JTabelRetouren = new JTable(ReturnData,ReturnColumnNames);
+        JTabelRetouren.setDefaultEditor(Object.class, null);
+        JTabelRetouren.addMouseListener(new MouseAdapter()
+        {
+            @Override
+            public void mousePressed(MouseEvent e)
+            {
+                if (e.getClickCount() == 2)
+                {
+                    int row = JTabelRetouren.getSelectedRow();
+                    Object returnOrderID = JTabelRetouren.getValueAt(row,0);
+                    ReturnOrderLines r = new ReturnOrderLines(returnOrderID);
+                }
+            }
+        });
     }
 
     @Override

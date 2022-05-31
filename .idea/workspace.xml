@@ -9,6 +9,11 @@
       <change beforePath="$PROJECT_DIR$/MainApplication/CustomerChange/CustomerChangeDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/MainApplication/CustomerChange/CustomerChangeDialog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MainApplication/OrderPage.form" beforeDir="false" afterPath="$PROJECT_DIR$/MainApplication/OrderPage.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MainApplication/OrderPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/MainApplication/OrderPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MainApplication/OrderLines.java" beforeDir="false" afterPath="$PROJECT_DIR$/MainApplication/OrderLines.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MainApplication/ReturnOrderLines.java" beforeDir="false" afterPath="$PROJECT_DIR$/MainApplication/ReturnOrderLines.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Realisatie-Java/DataBaseConnection/SQLMethods.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Realisatie-Java/DataBaseConnection/SQLMethods.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Realisatie-Java/MainApplication/OrderLines.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Realisatie-Java/MainApplication/OrderLines.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Realisatie-Java/MainApplication/ReturnOrderLines.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Realisatie-Java/MainApplication/ReturnOrderLines.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
