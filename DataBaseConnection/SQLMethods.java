@@ -1,6 +1,5 @@
 package DataBaseConnection;
 
-import java.math.BigDecimal;
 import java.sql.*;
 
 public class SQLMethods
@@ -270,14 +269,14 @@ public class SQLMethods
         try
         {
             s = c.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            rs = s.executeQuery("SELECT ol.OrderLineID, ol.OrderID, ol.StockItemID, s.StockItemName, ol.Quantity, s.EANCode, s.TaxRate, s.UnitRetailPrice FROM orderlines AS ol JOIN stockitems AS s ON ol.StockItemID = s.StockItemID WHERE OrderID = "+orderID+" ORDER BY OrderLineID;");
+            rs = s.executeQuery("SELECT ol.OrderlineID, ol.OrderID, ol.StockItemID, s.StockItemName, ol.Quantity, s.EANCode, s.TaxRate, s.UnitRetailPrice FROM orderlines AS ol JOIN stockitems AS s ON ol.StockItemID = s.StockItemID WHERE OrderID = "+orderID+" ORDER BY OrderLineID;");
 
             String[][] data = new String[GetRowCount(rs)][8];
 
             int i = 0;
             while (rs.next())
             {
-                int orderLineID = rs.getInt("OrderLineID");
+                int orderlineID = rs.getInt("OrderlineID");
                 int stockItemID = rs.getInt("StockItemID");
                 String stockItemName = rs.getString("StockItemName");
                 int quantity = rs.getInt("Quantity");
@@ -285,7 +284,7 @@ public class SQLMethods
                 float taxRate = rs.getFloat("TaxRate");
                 float unitRetailPrice = rs.getFloat("UnitRetailPrice");
 
-                data[i][0] = orderLineID+"";
+                data[i][0] = orderlineID +"";
                 data[i][1] = stockItemID+"";
                 data[i][2] = stockItemName;
                 data[i][3] = quantity+"";
@@ -341,14 +340,14 @@ public class SQLMethods
         try
         {
             s = c.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            rs = s.executeQuery("SELECT rl.ReturnOrderLineID, rl.ReturnOrderID, s.StockItemID, s.StockItemName, rl.Quantity, s.EANCode, s.TaxRate, s.UnitRetailPrice FROM returnorderlines AS rl JOIN stockitems AS s ON rl.StockItemID = s.StockItemID WHERE rl.ReturnOrderID="+returnOrderID+";");
+            rs = s.executeQuery("SELECT rl.ReturnOrderlineID, rl.ReturnOrderID, s.StockItemID, s.StockItemName, rl.Quantity, s.EANCode, s.TaxRate, s.UnitRetailPrice FROM returnorderlines AS rl JOIN stockitems AS s ON rl.StockItemID = s.StockItemID WHERE rl.ReturnOrderID="+returnOrderID+";");
 
             String[][] data = new String[GetRowCount(rs)][8];
 
             int i = 0;
             while (rs.next())
             {
-                int returnOrderLineID = rs.getInt("ReturnOrderLineID");
+                int returnOrderlineID = rs.getInt("ReturnOrderlineID");
                 int stockItemID = rs.getInt("StockItemID");
                 String stockItemName = rs.getString("StockItemName");
                 int quantity = rs.getInt("Quantity");
@@ -356,7 +355,7 @@ public class SQLMethods
                 float taxRate = rs.getFloat("TaxRate");
                 float unitRetailPrice = rs.getFloat("UnitRetailPrice");
 
-                data[i][0] = returnOrderLineID+"";
+                data[i][0] = returnOrderlineID +"";
                 data[i][1] = stockItemID+"";
                 data[i][2] = stockItemName;
                 data[i][3] = quantity+"";
