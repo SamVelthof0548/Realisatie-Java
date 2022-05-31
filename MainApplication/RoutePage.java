@@ -2,31 +2,18 @@ package MainApplication;
 
 import DataBaseConnection.SQLMethods;
 import javax.swing.*;
-
-import MainApplication.routepainter.RoutePainter;
 import kong.unirest.HttpResponse;
 import kong.unirest.JsonNode;
 import kong.unirest.Unirest;
 import kong.unirest.json.JSONArray;
 import kong.unirest.json.JSONObject;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import javax.swing.DefaultListModel;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-
-import org.jxmapviewer.JXMapViewer;
-import org.jxmapviewer.OSMTileFactoryInfo;
-import org.jxmapviewer.painter.CompoundPainter;
-import org.jxmapviewer.painter.Painter;
-import org.jxmapviewer.viewer.DefaultTileFactory;
 import org.jxmapviewer.viewer.GeoPosition;
-import org.jxmapviewer.viewer.TileFactoryInfo;
-
 
 public class RoutePage extends JPanel implements ActionListener {
     private JButton button1;
@@ -34,20 +21,22 @@ public class RoutePage extends JPanel implements ActionListener {
     private JLabel labelRoutebepaling;
     private JPanel RouteContent, RouteMap, RouteScroll;
     private JScrollPane scrollReturns, scrollOrders;
-    private JList orderlist;
-    private ArrayList<double[]> geolocations;
-    private ArrayList<GeoPosition> geopositions;
-    private ArrayList<GeoPosition> coordWaypoints;
 
+    private JList orderlist;
+    private ArrayList<double[]> coordinates; // longitude and latitude of selected addresses
+    private ArrayList<GeoPosition> geopositions; // longitude and latitude of optimized route points
+    private ArrayList<String> streetHints; // street hints to help Graphhopper api locate coordinates
+
+    // set dimensions of the screen
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     int screenHeight = screenSize.height;
     int screenWidth = screenSize.width;
+    TSPsolution solution;
 
     public RoutePage() {
         add(Routebepaling);
         Routebepaling.setPreferredSize(new Dimension(screenWidth, 500));
         Routebepaling.setVisible(true);
-
         button1.addActionListener(this);
     }
 
@@ -63,20 +52,8 @@ public class RoutePage extends JPanel implements ActionListener {
         orderlist.setVisibleRowCount(-1);
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        Object[] orders = orderlist.getSelectedValues();
-        geolocations = new ArrayList<>();
-
-        for (Object order : orders) {
-            String input = String.valueOf(order);
-            geolocations.add(getGeolocation(input));
-        }
-
-        createRouting();
-    }
-
-    public double[] getGeolocation(String zipcode)
+    // get longitude and latitude of the selected JList items
+    public double[] getLongLang(String zipcode)
     {
         double[] coords = new double[2];
         HttpResponse<JsonNode> result;
@@ -92,42 +69,33 @@ public class RoutePage extends JPanel implements ActionListener {
         return coords;
     }
 
-    public void createRouting(){
-        JXMapViewer mapViewer = new JXMapViewer();
+    // get the selected values from the JList
+    public void getValues() {
+        Object[] orders = orderlist.getSelectedValues();
+        coordinates = new ArrayList<>();
+        streetHints = new ArrayList<>();
 
-        // Display the viewer in a JFrame
-        JFrame frame = new JFrame("JXMapviewer2 Example 2");
-        frame.getContentPane().add(mapViewer);
-        frame.setSize(800, 600);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
-
-        // Create a TileFactoryInfo for OpenStreetMap
-        TileFactoryInfo info = new OSMTileFactoryInfo();
-        DefaultTileFactory tileFactory = new DefaultTileFactory(info);
-        mapViewer.setTileFactory(tileFactory);
-
-        // add coordinates to geopositions arraylist
-        geopositions = new ArrayList<>();
-        for (double[] coords : geolocations) {
-            geopositions.add(new GeoPosition(coords));
+        for (Object order : orders) {
+            String input = String.valueOf(order);
+            coordinates.add(getLongLang(input));
+            streetHints.add(input);
         }
+    }
 
-        // Create a track from the geo-positions
-        java.util.List<GeoPosition> track = geopositions;
-        RoutePainter routePainter = new RoutePainter(track);
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        getValues(); // get selected values
 
-        // Set the focus
-        mapViewer.zoomToBestFit(new HashSet<GeoPosition>(track), 0.7);
+        double startLon = coordinates.get(0)[1];
+        double startLat = coordinates.get(0)[0];
 
-        coordWaypoints = new ArrayList<>();
-        coordWaypoints.addAll(geopositions);
+        // start the solution by passing the;
+        // @start longitude and latitude
+        // @the longitude and latitude of every selected point
+        // @the street name of the selected points
+        solution = new TSPsolution(startLon, startLat, coordinates, streetHints);
 
-        // Create a compound painter that uses both the route-painter and the waypoint-painter
-        List<Painter<JXMapViewer>> painters = new ArrayList<>();
-        painters.add(routePainter);
-
-        CompoundPainter<JXMapViewer> painter = new CompoundPainter<JXMapViewer>(painters);
-        mapViewer.setOverlayPainter(painter);
+        // create a map to display the optimal route
+        solution.createRouting(); // show map
     }
 }
