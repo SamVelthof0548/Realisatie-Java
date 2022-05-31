@@ -404,4 +404,15 @@ public class SQLMethods
         }
         catch (Exception ex) {System.out.println(ex.getMessage());}
     }
+
+    String productnaam,productgrootte,productgewicht,eancode,belastingpercentage,inkoopprijs,verkoopprijs;
+    public void getProductData(int productnummer)
+    {
+        try
+        {
+            s = c.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            rs = s.executeQuery("select s.StockItemName,s.UnitSize,s.UnitWeight,s.EANCode,s.TaxRate,s.UnitPrice,s.UnitRetailPrice,sh.QuantityOnHand from stockitems as s join stockitemholdings as sh on s.StockItemID = sh.StockItemID where ProductID ="+productnummer+";");
+        }
+    }
+
 }

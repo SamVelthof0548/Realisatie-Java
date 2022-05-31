@@ -17,6 +17,7 @@ public class StockPage extends JPanel implements ActionListener
     private JScrollPane voorraadWeergeven;
     private JTable JTabelVoorraad;
     private JButton JBtoevoegenProduct;
+    private JButton JBwijzigenProduct;
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     int screenHeight = screenSize.height;
     int screenWidth = screenSize.width;
@@ -26,6 +27,7 @@ public class StockPage extends JPanel implements ActionListener
         add(Voorraad);
         Voorraad.setPreferredSize(new Dimension(screenWidth, 500));
         JBtoevoegenProduct.addActionListener(this);
+        JBwijzigenProduct.addActionListener(this);
         Voorraad.setVisible(true);
     }
 
@@ -46,6 +48,10 @@ public class StockPage extends JPanel implements ActionListener
         if (e.getSource()==JBtoevoegenProduct)
         {
             ProductAdd productAdd = new ProductAdd(setframe);
+        }
+        if (e.getSource()==JBwijzigenProduct)
+        {
+            ProductChangeDialog productChange = new ProductChangeDialog(setframe);
         }
     }
 }
