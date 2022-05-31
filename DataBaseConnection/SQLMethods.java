@@ -19,7 +19,7 @@ public class SQLMethods
         {
             String url = "jdbc:mysql://localhost/nerdygadgetsnl";
             String user = "root";
-            String password = "123456789";
+            String password = "";
 
             c = DriverManager.getConnection(url, user, password);
         }
@@ -81,6 +81,7 @@ public class SQLMethods
 
                 i++;
             }
+            c.close();
             return data;
         }
         catch (Exception ex) {System.out.println(ex.getMessage());}
@@ -126,6 +127,7 @@ public class SQLMethods
 
                 i++;
             }
+            c.close();
             return data;
         }
         catch (Exception ex) {System.out.println(ex.getMessage());}
@@ -161,6 +163,7 @@ public class SQLMethods
 
                 i++;
             }
+            c.close();
             return data;
         }
         catch (Exception ex) {System.out.println(ex.getMessage());}
@@ -190,6 +193,7 @@ public class SQLMethods
 
                 i++;
             }
+            c.close();
             return model;
         }
         catch (Exception ex) {
@@ -220,7 +224,7 @@ public class SQLMethods
 
                 i++;
             }
-
+            c.close();
             return data;
         }
         catch (Exception ex) {
@@ -259,6 +263,7 @@ public class SQLMethods
 
                 i++;
             }
+            c.close();
             return data;
         }
         catch (Exception ex) {System.out.println(ex.getMessage());}
@@ -273,7 +278,7 @@ public class SQLMethods
             String query="insert into stockitems (StockItemName,UnitSize,UnitWeight,EANCode,TaxRate,UnitPrice,UnitRetailPrice,LastEditedWhen)"
                     + " values (?,?,?,?,?,?,?,current_timestamp())";
 
-            PreparedStatement stmt = c.prepareStatement(query);
+            PreparedStatement stmt = c.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1,productNaam);
             stmt.setString(2,productGrootte);
             stmt.setDouble(3,productGewicht);
@@ -284,20 +289,23 @@ public class SQLMethods
 
             stmt.execute();
 
-//            String query1="select StockItemID from stockitems where EANCode = ?";
-//
-//            PreparedStatement stmt1 = c.prepareStatement(query);
-//            stmt1.setString(1,eancode);
+            rs  = stmt.getGeneratedKeys();
+            int result = 0;
+            if (rs.next())
+            {
+                result=rs.getInt(1);
+            }
 
             String query2="insert into stockitemholdings (StockItemID,QuantityOnHand,LastEditedWhen)"
                     + " values (?,?,current_timestamp())";
 
-//            PreparedStatement stmt2 = c.prepareStatement(query2);
-//            stmt.setInt(1,);
-//            stmt.setInt(2,voorraad);
-//
-//            stmt2.execute();
+            PreparedStatement stmt2 = c.prepareStatement(query2);
+            stmt2.setInt(1,result);
+            stmt2.setInt(2,voorraad);
 
+            stmt2.execute();
+
+            ViewStockData();
             c.close();
         }
         catch (Exception ex) {System.out.println(ex.getMessage());}
