@@ -2,7 +2,6 @@ package DataBaseConnection;
 
 import javax.swing.*;
 import java.sql.*;
-import java.util.Calendar;
 
 public class SQLMethods
 {
@@ -305,7 +304,6 @@ public class SQLMethods
 
             stmt2.execute();
 
-            ViewStockData();
             c.close();
         }
         catch (Exception ex) {System.out.println(ex.getMessage());}
@@ -400,6 +398,122 @@ public class SQLMethods
             stmt.setString(5,"Open");
 
             stmt.execute();
+            c.close();
+        }
+        catch (Exception ex) {System.out.println(ex.getMessage());}
+    }
+
+    public String productnaam,productgrootte,productgewicht,eancode,belastingpercentage,inkoopprijs,verkoopprijs,voorraad;
+    public void getProductData(int productnummer)
+    {
+        try
+        {
+            s = c.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            rs = s.executeQuery("select s.StockItemName,s.UnitSize,s.UnitWeight,s.EANCode,s.TaxRate,s.UnitPrice,s.UnitRetailPrice,sh.QuantityOnHand from stockitems as s join stockitemholdings as sh on s.StockItemID = sh.StockItemID where s.StockItemID ="+productnummer);
+
+            while (rs.next())
+            {
+                productnaam = rs.getString("StockItemName");
+                productgrootte = rs.getString("UnitSize");
+                productgewicht = rs.getString("UnitWeight");
+                eancode = rs.getString("EANCode");
+                belastingpercentage = rs.getString("TaxRate");
+                inkoopprijs = rs.getString("UnitPrice");
+                verkoopprijs = rs.getString("UnitRetailPrice");
+                voorraad = rs.getString("QuantityOnHand");
+            }
+        }
+        catch (Exception ex)
+        {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public void updateProduct(int productnummer,String naam,String grootte,double gewicht,String eancode,double belastingpercentage,double inkoopprijs, double verkoopprijs,int voorraad)
+    {
+        try
+        {
+            String query="update stockitems set StockItemName=?,UnitSize=?,UnitWeight=?,EANCode=?,TaxRate=?,UnitPrice=?,UnitRetailPrice=?,LastEditedWhen=current_timestamp() where StockItemID="+productnummer+";";
+
+            PreparedStatement stmt = c.prepareStatement(query);
+            stmt.setString(1,naam);
+            stmt.setString(2,grootte);
+            stmt.setDouble(3,gewicht);
+            stmt.setString(4,eancode);
+            stmt.setDouble(5,belastingpercentage);
+            stmt.setDouble(6,inkoopprijs);
+            stmt.setDouble(7,verkoopprijs);
+
+            stmt.execute();
+
+            rs  = stmt.getGeneratedKeys();
+            int result = 0;
+            if (rs.next())
+            {
+                result=rs.getInt(1);
+            }
+
+            String query2="update stockitemholdings set StockItemID=?,QuantityOnHand=?,LastEditedWhen=current_timestamp() where StockItemID="+productnummer+";";
+
+            PreparedStatement stmt2 = c.prepareStatement(query2);
+            stmt2.setInt(1,productnummer);
+            stmt2.setInt(2,voorraad);
+
+            stmt2.execute();
+
+            c.close();
+        }
+        catch (Exception ex) {System.out.println(ex.getMessage());}
+    }
+
+    public String geslacht,voornaam,tussenvoegsel,achternaam,geboortedatum,mailadres,telefoonnummer,adres,postcode,woonplaats;
+    public void getCustomerData(int klantnummer)
+    {
+        try
+        {
+            s = c.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            rs = s.executeQuery("select * from customers WHERE CustomerID="+klantnummer);
+
+            while (rs.next())
+            {
+                geslacht = rs.getString("Sex");
+                voornaam = rs.getString("FirstName");
+                tussenvoegsel = rs.getString("Suffix");
+                achternaam = rs.getString("LastName");
+                geboortedatum = rs.getString("BirthDate");
+                mailadres = rs.getString("EmailAddress");
+                telefoonnummer = rs.getString("MobilePhone");
+                adres = rs.getString("Address");
+                postcode = rs.getString("PostalCode");
+                woonplaats = rs.getString("PlaceOfResidence");
+            }
+        }
+        catch (Exception ex)
+        {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public void updateCustomer(int klantnummer,String geslacht,String voornaam,String tussenvoegsel,String achternaam,Date geboortedatum,String mailadres,String telefoonnummer,String adres,String postcode,String woonplaats)
+    {
+        try
+        {
+            String query="UPDATE customers SET Sex=?,FirstName=?,Suffix=?,LastName=?,BirthDate=?,EmailAddress=?,MobilePhone=?,Address=?,PostalCode=?,PlaceOfResidence=?,LastEditedWhen=current_timestamp() WHERE CustomerID="+klantnummer;
+
+            PreparedStatement stmt = c.prepareStatement(query);
+            stmt.setString(1,geslacht);
+            stmt.setString(2,voornaam);
+            stmt.setString(3,tussenvoegsel);
+            stmt.setString(4,achternaam);
+            stmt.setDate(5,geboortedatum);
+            stmt.setString(6,mailadres);
+            stmt.setString(7,telefoonnummer);
+            stmt.setString(8,adres);
+            stmt.setString(9,postcode);
+            stmt.setString(10,woonplaats);
+
+            stmt.execute();
+
             c.close();
         }
         catch (Exception ex) {System.out.println(ex.getMessage());}
