@@ -2,15 +2,20 @@ package MainApplication;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JTable;
 import DataBaseConnection.SQLMethods;
 
-public class CustomerPage extends JPanel
+import static MainApplication.MainApplication.setframe;
+
+public class CustomerPage extends JPanel implements ActionListener
 {
     private JPanel Klanten;
     private JLabel labelKlanten;
     private JScrollPane klantenWeergeven;
     private JTable JTabelKlanten;
+    private JButton JBtoevoegenKlant;
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     int screenHeight = screenSize.height;
     int screenWidth = screenSize.width;
@@ -19,6 +24,7 @@ public class CustomerPage extends JPanel
     {
         add(Klanten);
         Klanten.setPreferredSize(new Dimension(screenWidth, 500));
+        JBtoevoegenKlant.addActionListener(this);
         Klanten.setVisible(true);
     }
 
@@ -31,5 +37,13 @@ public class CustomerPage extends JPanel
         String[][] CustomerData = sql.ViewCustomerData();
 
         JTabelKlanten = new JTable(CustomerData,CustomerColumnNames);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource()==JBtoevoegenKlant)
+        {
+            CustomerAdd customerAdd = new CustomerAdd(setframe);
+        }
     }
 }
