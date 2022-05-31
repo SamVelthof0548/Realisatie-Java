@@ -336,4 +336,23 @@ public class SQLMethods
             System.out.println(ex.getMessage());
         }
     }
+
+    public String[][] viewReturnOrderLinesData()
+    {
+        return null;
+    }
+
+    public String returnOrderID_r, orderID_r,customerID_r,returnOrderDate,status_r,firstName_r,suffix_r,lastName_r,emailAddress_r,mobilePhone_r,address_r,postalCode_r,placeOfResidence_r;
+    public void getReturnOrderLinesVariables(Object returnOrderID)
+    {
+        try
+        {
+            s = c.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            rs = s.executeQuery("SELECT r.ReturnOrderID");
+        }
+        catch (Exception ex)
+        {
+            System.out.println(ex.getMessage());
+        }
+    }
 }
