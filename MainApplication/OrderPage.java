@@ -41,9 +41,8 @@ public class OrderPage extends JPanel
                 if (e.getClickCount() == 2)
                 {
                     int row = JTabelOrders.getSelectedRow();
-                    Object OrderID = JTabelOrders.getValueAt(row,0);
-                    OrderLines o = new OrderLines(OrderID);
-
+                    Object orderID = JTabelOrders.getValueAt(row,0);
+                    OrderLines o = new OrderLines(orderID);
                 }
             }
         });

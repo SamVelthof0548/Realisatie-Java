@@ -263,4 +263,40 @@ public class SQLMethods
         catch (Exception ex) {System.out.println(ex.getMessage());}
         return null;
     }
+
+    public String[][] viewOrderLinesData(Object orderID)
+    {
+        return null;
+    }
+
+    public String orderID_o,customerID_o,orderDate,expectedDeliveryDate,status_o,firstName_o,suffix_o,lastName_o,emailAddress_o,mobilePhone_o,address_o,postalCode_o,placeOfResidence_o;
+    public void getOrderLinesVariables(Object orderID)
+    {
+        try
+        {
+            s = c.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            rs = s.executeQuery("SELECT o.OrderID, o.CustomerID, o.OrderDate, o.ExpectedDeliveryDate, o.Status, c.FirstName, c.Suffix, c.LastName, c.EmailAddress, c.MobilePhone, c.Address, c.PostalCode, c.PlaceOfResidence FROM orders AS o JOIN customers AS c on o.CustomerID = c.CustomerID WHERE OrderID = "+orderID+" ORDER BY OrderID;");
+
+            while (rs.next())
+            {
+                orderID_o = rs.getString("OrderID");
+                customerID_o = rs.getString("CustomerID");
+                orderDate = rs.getString("OrderDate");
+                expectedDeliveryDate = rs.getString("ExpectedDeliveryDate");
+                status_o = rs.getString("Status");
+                firstName_o = rs.getString("FirstName");
+                suffix_o = rs.getString("Suffix");
+                lastName_o = rs.getString("LastName");
+                emailAddress_o = rs.getString("EmailAddress");
+                mobilePhone_o = rs.getString("MobilePhone");
+                address_o = rs.getString("Address");
+                postalCode_o = rs.getString("PostalCode");
+                placeOfResidence_o = rs.getString("PlaceOfResidence");
+            }
+        }
+        catch (Exception ex)
+        {
+            System.out.println(ex.getMessage());
+        }
+    }
 }
