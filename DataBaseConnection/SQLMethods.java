@@ -2,7 +2,6 @@ package DataBaseConnection;
 
 import javax.swing.*;
 import java.sql.*;
-import java.util.Calendar;
 
 public class SQLMethods
 {
@@ -423,7 +422,6 @@ public class SQLMethods
                 verkoopprijs = rs.getString("UnitRetailPrice");
                 voorraad = rs.getString("QuantityOnHand");
             }
-            System.out.println(productnaam);
         }
         catch (Exception ex)
         {
@@ -468,4 +466,56 @@ public class SQLMethods
         catch (Exception ex) {System.out.println(ex.getMessage());}
     }
 
+    public String geslacht,voornaam,tussenvoegsel,achternaam,geboortedatum,mailadres,telefoonnummer,adres,postcode,woonplaats;
+    public void getCustomerData(int klantnummer)
+    {
+        try
+        {
+            s = c.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            rs = s.executeQuery("select * from customers WHERE CustomerID="+klantnummer);
+
+            while (rs.next())
+            {
+                geslacht = rs.getString("Sex");
+                voornaam = rs.getString("FirstName");
+                tussenvoegsel = rs.getString("Suffix");
+                achternaam = rs.getString("LastName");
+                geboortedatum = rs.getString("BirthDate");
+                mailadres = rs.getString("EmailAddress");
+                telefoonnummer = rs.getString("MobilePhone");
+                adres = rs.getString("Address");
+                postcode = rs.getString("PostalCode");
+                woonplaats = rs.getString("PlaceOfResidence");
+            }
+        }
+        catch (Exception ex)
+        {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public void updateCustomer(int klantnummer,String geslacht,String voornaam,String tussenvoegsel,String achternaam,Date geboortedatum,String mailadres,String telefoonnummer,String adres,String postcode,String woonplaats)
+    {
+        try
+        {
+            String query="UPDATE customers SET Sex=?,FirstName=?,Suffix=?,LastName=?,BirthDate=?,EmailAddress=?,MobilePhone=?,Address=?,PostalCode=?,PlaceOfResidence=?,LastEditedWhen=current_timestamp() WHERE CustomerID="+klantnummer;
+
+            PreparedStatement stmt = c.prepareStatement(query);
+            stmt.setString(1,geslacht);
+            stmt.setString(2,voornaam);
+            stmt.setString(3,tussenvoegsel);
+            stmt.setString(4,achternaam);
+            stmt.setDate(5,geboortedatum);
+            stmt.setString(6,mailadres);
+            stmt.setString(7,telefoonnummer);
+            stmt.setString(8,adres);
+            stmt.setString(9,postcode);
+            stmt.setString(10,woonplaats);
+
+            stmt.execute();
+
+            c.close();
+        }
+        catch (Exception ex) {System.out.println(ex.getMessage());}
+    }
 }

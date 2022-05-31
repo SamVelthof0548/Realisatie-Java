@@ -4,55 +4,61 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import DataBaseConnection.SQLMethods;
 
 public class CustomerChange extends JDialog implements ActionListener {
-    private int klantnummer;
-    private JTextField JTproductNaam,JTproductgrootte,JTproductgewicht,JTeancode,JTbelastingpercentage,JTinkoopprijs,JTverkoopprijs,JTvoorraad;
-    private JLabel JLproductNaam,JLproductgrootte,JLproductgewicht,JLeancode,JLbelastingpercentage,JLinkoopprijs,JLverkoopprijs,JLvoorraad;
+    private int klantnummer=CustomerChangeDialog.klantnummer;
+    private JTextField JTgeslacht, JTvoornaam, JTtussenvoegsel, JTachternaam, JTgeboortedatum, JTmailadres, JTtelefoonnummer, JTadres,JTpostcode,JTwoonplaats;
+    private JLabel JLgeslacht, JLvoornaam, JLtussenvoegsel,JLachternaam, JLgeboortedatum, JLmailadres, JLtelefoonnummer, JLadres, JLpostcode, JLwoonplaats;
     private JButton JBwijzigen,JBannuleren;
-    private String nieuweNaam,nieuweGrootte,nieuweEancode;
-    private double nieuwGewicht,nieuwBelastingpercentage,nieuweInkoopprijs,nieuweVerkoopprijs;
-    private int nieuweVoorraad;
+    private String nieuwGeslacht,nieuweVoornaam, nieuwTussenvoegsel,nieuweAchternaam,nieuweMailadres,nieuwTelefoonnummer,nieuwAdres,nieuwePostcode,nieuweWoonplaats;
+    private Date nieuweGeboortedatum;
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     int screenHeight = screenSize.height;
     int screenWidth = screenSize.width;
+    static java.util.Date formatGBD;
     static boolean gelukt;
 
-    public CustomerChange(JFrame frame, int klantnummer)
+    public CustomerChange(JFrame frame)
     {
         super(frame,true);
-        klantnummer =this.klantnummer;
-        pack();
         SQLMethods sqlMethods = new SQLMethods();
         sqlMethods.CreateDataBaseConnection();
-        sqlMethods.getProductData(klantnummer);
+        sqlMethods.getCustomerData(klantnummer);
         setSize(new Dimension(screenWidth,300));
-        setTitle("Product wijzigen");
+        setTitle("Klant wijzigen");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         setLayout(new GridLayout(2,1));
 
         JPanel gegevens= new JPanel();
-        gegevens.setLayout(new GridLayout(2,8));
+        gegevens.setLayout(new GridLayout(2,10));
 
-        gegevens.add(JLproductNaam=new JLabel("Productnaam"));
-        gegevens.add(JLproductgrootte=new JLabel("Afmetingen"));
-        gegevens.add(JLproductgewicht=new JLabel("Gewicht"));
-        gegevens.add(JLeancode=new JLabel("EAN-Code"));
-        gegevens.add(JLbelastingpercentage=new JLabel("Belastingpercentage"));
-        gegevens.add(JLinkoopprijs=new JLabel("Inkoopprijs"));
-        gegevens.add(JLverkoopprijs=new JLabel("Verkoopprijs"));
-        gegevens.add(JLvoorraad=new JLabel("Voorraad"));
+        gegevens.add(JLgeslacht =new JLabel("Geslacht"));
+        gegevens.add(JLvoornaam =new JLabel("Voornaam"));
+        gegevens.add(JLtussenvoegsel =new JLabel("Tussenvoegsel"));
+        gegevens.add(JLachternaam=new JLabel("Achternaam"));
+        gegevens.add(JLgeboortedatum =new JLabel("Geboortedatum"));
+        gegevens.add(JLmailadres =new JLabel("Mailadres"));
+        gegevens.add(JLtelefoonnummer =new JLabel("Telefoonnummer"));
+        gegevens.add(JLadres =new JLabel("Adres"));
+        gegevens.add(JLpostcode =new JLabel("Postcode"));
+        gegevens.add(JLwoonplaats =new JLabel("Woonplaats"));
 
-        gegevens.add(JTproductNaam=new JTextField(sqlMethods.productnaam));
-        gegevens.add(JTproductgrootte=new JTextField(sqlMethods.productgrootte));
-        gegevens.add(JTproductgewicht=new JTextField(sqlMethods.productgewicht));
-        gegevens.add(JTeancode=new JTextField(sqlMethods.eancode));
-        gegevens.add(JTbelastingpercentage=new JTextField(sqlMethods.belastingpercentage));
-        gegevens.add(JTinkoopprijs=new JTextField(sqlMethods.inkoopprijs));
-        gegevens.add(JTverkoopprijs=new JTextField(sqlMethods.verkoopprijs));
-        gegevens.add(JTvoorraad=new JTextField(sqlMethods.voorraad));
+        gegevens.add(JTgeslacht =new JTextField(sqlMethods.geslacht));
+        gegevens.add(JTvoornaam =new JTextField(sqlMethods.voornaam));
+        gegevens.add(JTtussenvoegsel =new JTextField(sqlMethods.tussenvoegsel));
+        gegevens.add(JTachternaam =new JTextField(sqlMethods.achternaam));
+        gegevens.add(JTgeboortedatum =new JTextField(sqlMethods.geboortedatum));
+        gegevens.add(JTmailadres =new JTextField(sqlMethods.mailadres));
+        gegevens.add(JTtelefoonnummer =new JTextField(sqlMethods.telefoonnummer));
+        gegevens.add(JTadres =new JTextField(sqlMethods.adres));
+        gegevens.add(JTpostcode =new JTextField(sqlMethods.postcode));
+        gegevens.add(JTwoonplaats =new JTextField(sqlMethods.woonplaats));
 
         JPanel button=new JPanel();
         button.setLayout(new GridLayout(1,2));
@@ -73,22 +79,25 @@ public class CustomerChange extends JDialog implements ActionListener {
             sql.CreateDataBaseConnection();
             try
             {
-                nieuweNaam=JTproductNaam.getText();
-                nieuweGrootte=JTproductgrootte.getText();
-                nieuwGewicht=Double.parseDouble(JTproductgewicht.getText());
-                nieuweEancode=JTeancode.getText();
-                nieuwBelastingpercentage=Double.parseDouble(JTbelastingpercentage.getText());
-                nieuweInkoopprijs=Double.parseDouble(JTinkoopprijs.getText());
-                nieuweVerkoopprijs=Double.parseDouble(JTverkoopprijs.getText());
-                nieuweVoorraad=Integer.parseInt(JTvoorraad.getText());
+                nieuwGeslacht= JTgeslacht.getText();
+                nieuweVoornaam= JTvoornaam.getText();
+                nieuwTussenvoegsel = JTtussenvoegsel.getText();
+                nieuweAchternaam = JTachternaam.getText();
+                formatGBD=new SimpleDateFormat("yyyy/MM/dd").parse(JTgeboortedatum.getText());
+                nieuweGeboortedatum=new java.sql.Date(formatGBD.getTime());
+                nieuweMailadres= JTmailadres.getText();
+                nieuwTelefoonnummer = JTtelefoonnummer.getText();
+                nieuwAdres = JTadres.getText();
+                nieuwePostcode = JTpostcode.getText();
+                nieuweWoonplaats = JTwoonplaats.getText();
                 gelukt=true;
             }
-            catch (NumberFormatException nfe)
+            catch (ParseException pe)
             {
-                JOptionPane.showMessageDialog(null,"Vul bij gewicht, EAN-code, belastingspercentage, prijs en verkoopprijs een getal in!","FOUT!!",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null,"Vul  geboortedatum in als yyyy/mm/dd!","FOUT!!",JOptionPane.ERROR_MESSAGE);
                 gelukt=false;
             }
-            sql.updateProduct(klantnummer,nieuweNaam,nieuweGrootte,nieuwGewicht,nieuweEancode,nieuwBelastingpercentage,nieuweInkoopprijs,nieuweVerkoopprijs,nieuweVoorraad);
+            sql.updateCustomer(klantnummer,nieuwGeslacht,nieuweVoornaam,nieuwTussenvoegsel, nieuweAchternaam,nieuweGeboortedatum,nieuweMailadres,nieuwTelefoonnummer,nieuwAdres,nieuwePostcode,nieuweWoonplaats);
             if (gelukt)
             {
                 setVisible(false);

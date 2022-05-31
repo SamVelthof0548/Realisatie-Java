@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import DataBaseConnection.SQLMethods;
 
 public class ProductChange extends JDialog implements ActionListener {
-    private int productnummer;
+    private int productID=ProductChangeDialog.productnummer;
     private JTextField JTproductNaam,JTproductgrootte,JTproductgewicht,JTeancode,JTbelastingpercentage,JTinkoopprijs,JTverkoopprijs,JTvoorraad;
     private JLabel JLproductNaam,JLproductgrootte,JLproductgewicht,JLeancode,JLbelastingpercentage,JLinkoopprijs,JLverkoopprijs,JLvoorraad;
     private JButton JBwijzigen,JBannuleren;
@@ -19,14 +19,12 @@ public class ProductChange extends JDialog implements ActionListener {
     int screenWidth = screenSize.width;
     static boolean gelukt;
 
-    public ProductChange(JFrame frame,int productnummer)
+    public ProductChange(JFrame frame)
     {
         super(frame,true);
-        productnummer=this.productnummer;
-        pack();
         SQLMethods sqlMethods = new SQLMethods();
         sqlMethods.CreateDataBaseConnection();
-        sqlMethods.getProductData(productnummer);
+        sqlMethods.getProductData(productID);
         setSize(new Dimension(screenWidth,300));
         setTitle("Product wijzigen");
         setLocationRelativeTo(null);
@@ -88,7 +86,7 @@ public class ProductChange extends JDialog implements ActionListener {
                 JOptionPane.showMessageDialog(null,"Vul bij gewicht, EAN-code, belastingspercentage, prijs en verkoopprijs een getal in!","FOUT!!",JOptionPane.ERROR_MESSAGE);
                 gelukt=false;
             }
-            sql.updateProduct(productnummer,nieuweNaam,nieuweGrootte,nieuwGewicht,nieuweEancode,nieuwBelastingpercentage,nieuweInkoopprijs,nieuweVerkoopprijs,nieuweVoorraad);
+            sql.updateProduct(productID,nieuweNaam,nieuweGrootte,nieuwGewicht,nieuweEancode,nieuwBelastingpercentage,nieuweInkoopprijs,nieuweVerkoopprijs,nieuweVoorraad);
             if (gelukt)
             {
                 setVisible(false);

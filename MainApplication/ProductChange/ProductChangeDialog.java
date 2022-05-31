@@ -10,13 +10,12 @@ public class ProductChangeDialog extends JDialog implements ActionListener {
     JTextField JTproductID;
     JLabel JLvraag;
     static JFrame frame;
-    private int productnummer;
+    static int productnummer;
     static boolean gelukt;
 
     public ProductChangeDialog(JFrame frame)
     {
         super(frame,true);
-        pack();
         ProductChangeDialog.frame=frame;
         setTitle("Product Wijzigen");
         setLayout(new GridLayout(3,1));
@@ -47,7 +46,7 @@ public class ProductChangeDialog extends JDialog implements ActionListener {
             }
             if (gelukt)
             {
-                ProductChange productChange = new ProductChange(frame,productnummer);
+                ProductChange productChange = new ProductChange(frame);
                 setVisible(false);
             }
         }

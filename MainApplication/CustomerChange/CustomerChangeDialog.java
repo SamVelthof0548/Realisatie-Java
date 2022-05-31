@@ -10,13 +10,12 @@ public class CustomerChangeDialog extends JDialog implements ActionListener {
     JTextField JTcustomerID;
     JLabel JLvraag;
     static JFrame frame;
-    private int klantnummer;
+    static int klantnummer;
     static boolean gelukt;
 
     public CustomerChangeDialog(JFrame frame)
     {
         super(frame,true);
-        pack();
         CustomerChangeDialog.frame=frame;
         setTitle("Klant Wijzigen");
         setLayout(new GridLayout(3,1));
@@ -47,7 +46,7 @@ public class CustomerChangeDialog extends JDialog implements ActionListener {
             }
             if (gelukt)
             {
-                CustomerChange customerChange = new CustomerChange(frame, klantnummer);
+                CustomerChange customerChange = new CustomerChange(frame);
                 setVisible(false);
             }
         }
