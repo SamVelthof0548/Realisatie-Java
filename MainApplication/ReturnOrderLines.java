@@ -51,7 +51,7 @@ public class ReturnOrderLines extends JFrame
         PData.add(new JLabel(sqlMethods.returnOrderDate));
 
         String[][] ReturnOrderLinesData = sqlMethods.viewReturnOrderLinesData(returnOrderID);
-        String[] ReturnOrderLinesColumns = {"","Productnummer","Omschrijving","Aantal","Barcode","BTW","Prijs per stuk","Prijs"};
+        String[] ReturnOrderLinesColumns = {"Retourregelnr.","Productnr.","Omschrijving","Aantal","Barcode","BTW","Prijs per stuk","Prijs"};
         JTable ReturnOrderLinesTable = new JTable(ReturnOrderLinesData,ReturnOrderLinesColumns);
 
         JScrollPane PTable = new JScrollPane(ReturnOrderLinesTable);

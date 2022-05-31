@@ -51,7 +51,7 @@ public class OrderLines extends JFrame
         PData.add(new JLabel(sqlMethods.expectedDeliveryDate));
 
         String[][] OrderLinesData = sqlMethods.viewOrderLinesData(orderID);
-        String[] OrderLinesColumns = {"","Productnummer","Omschrijving","Aantal","Barcode","BTW","Prijs per stuk","Prijs"};
+        String[] OrderLinesColumns = {"Bestellingsregelnr.","Productnr.","Omschrijving","Aantal","Barcode","BTW","Prijs per stuk","Prijs"};
         JTable OrderLinesTable = new JTable(OrderLinesData, OrderLinesColumns);
 
         JScrollPane PTable = new JScrollPane(OrderLinesTable);

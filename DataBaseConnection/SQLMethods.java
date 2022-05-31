@@ -275,9 +275,9 @@ public class SQLMethods
             String[][] data = new String[GetRowCount(rs)][8];
 
             int i = 0;
-            int aantalResultaten = 1;
             while (rs.next())
             {
+                int orderLineID = rs.getInt("OrderLineID");
                 int stockItemID = rs.getInt("StockItemID");
                 String stockItemName = rs.getString("StockItemName");
                 int quantity = rs.getInt("Quantity");
@@ -285,7 +285,7 @@ public class SQLMethods
                 float taxRate = rs.getFloat("TaxRate");
                 float unitRetailPrice = rs.getFloat("UnitRetailPrice");
 
-                data[i][0] = aantalResultaten+"";
+                data[i][0] = orderLineID+"";
                 data[i][1] = stockItemID+"";
                 data[i][2] = stockItemName;
                 data[i][3] = quantity+"";
@@ -295,7 +295,6 @@ public class SQLMethods
                 data[i][7] = "€"+Math.round((unitRetailPrice*quantity)*100.0)/100.0;
 
                 i++;
-                aantalResultaten++;
             }
             return data;
         }
@@ -347,9 +346,9 @@ public class SQLMethods
             String[][] data = new String[GetRowCount(rs)][8];
 
             int i = 0;
-            int aantalResultaten = 1;
             while (rs.next())
             {
+                int returnOrderLineID = rs.getInt("ReturnOrderLineID");
                 int stockItemID = rs.getInt("StockItemID");
                 String stockItemName = rs.getString("StockItemName");
                 int quantity = rs.getInt("Quantity");
@@ -357,7 +356,7 @@ public class SQLMethods
                 float taxRate = rs.getFloat("TaxRate");
                 float unitRetailPrice = rs.getFloat("UnitRetailPrice");
 
-                data[i][0] = aantalResultaten+"";
+                data[i][0] = returnOrderLineID+"";
                 data[i][1] = stockItemID+"";
                 data[i][2] = stockItemName;
                 data[i][3] = quantity+"";
@@ -367,7 +366,6 @@ public class SQLMethods
                 data[i][7] = "€"+Math.round((unitRetailPrice*quantity)*100.0)/100.0;
 
                 i++;
-                aantalResultaten++;
             }
             return data;
         }
