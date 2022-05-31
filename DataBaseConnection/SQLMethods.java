@@ -555,4 +555,146 @@ public class SQLMethods
         }
         catch (Exception ex) {System.out.println(ex.getMessage());}
     }
+
+    public String[][] viewOrderLinesData(Object orderID)
+    {
+        try
+        {
+            s = c.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            rs = s.executeQuery("SELECT ol.OrderlineID, ol.OrderID, ol.StockItemID, s.StockItemName, ol.Quantity, s.EANCode, s.TaxRate, s.UnitRetailPrice FROM orderlines AS ol JOIN stockitems AS s ON ol.StockItemID = s.StockItemID WHERE OrderID = "+orderID+" ORDER BY OrderLineID;");
+
+            String[][] data = new String[GetRowCount(rs)][8];
+
+            int i = 0;
+            while (rs.next())
+            {
+                int orderlineID = rs.getInt("OrderlineID");
+                int stockItemID = rs.getInt("StockItemID");
+                String stockItemName = rs.getString("StockItemName");
+                int quantity = rs.getInt("Quantity");
+                String eanCode = rs.getString("EANCode");
+                float taxRate = rs.getFloat("TaxRate");
+                float unitRetailPrice = rs.getFloat("UnitRetailPrice");
+
+                data[i][0] = orderlineID +"";
+                data[i][1] = stockItemID+"";
+                data[i][2] = stockItemName;
+                data[i][3] = quantity+"";
+                data[i][4] = eanCode;
+                data[i][5] = taxRate+"%";
+                data[i][6] = "€"+unitRetailPrice;
+                data[i][7] = "€"+Math.round((unitRetailPrice*quantity)*100.0)/100.0;
+
+                i++;
+            }
+            return data;
+        }
+        catch (Exception ex)
+        {
+            System.out.println(ex.getMessage());
+        }
+        return null;
+    }
+
+    public String orderID_o,customerID_o,orderDate,expectedDeliveryDate,status_o,firstName_o,suffix_o,lastName_o,emailAddress_o,mobilePhone_o,address_o,postalCode_o,placeOfResidence_o;
+    public void getOrderLinesVariables(Object orderID)
+    {
+        try
+        {
+            s = c.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            rs = s.executeQuery("SELECT o.OrderID, o.CustomerID, o.OrderDate, o.ExpectedDeliveryDate, o.Status, c.FirstName, c.Suffix, c.LastName, c.EmailAddress, c.MobilePhone, c.Address, c.PostalCode, c.PlaceOfResidence FROM orders AS o JOIN customers AS c on o.CustomerID = c.CustomerID WHERE OrderID = "+orderID+" ORDER BY OrderID;");
+
+            while (rs.next())
+            {
+                orderID_o = rs.getString("OrderID");
+                customerID_o = rs.getString("CustomerID");
+                orderDate = rs.getString("OrderDate");
+                expectedDeliveryDate = rs.getString("ExpectedDeliveryDate");
+                status_o = rs.getString("Status");
+                firstName_o = rs.getString("FirstName");
+                suffix_o = rs.getString("Suffix");
+                lastName_o = rs.getString("LastName");
+                emailAddress_o = rs.getString("EmailAddress");
+                mobilePhone_o = rs.getString("MobilePhone");
+                address_o = rs.getString("Address");
+                postalCode_o = rs.getString("PostalCode");
+                placeOfResidence_o = rs.getString("PlaceOfResidence");
+            }
+        }
+        catch (Exception ex)
+        {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public String[][] viewReturnOrderLinesData(Object returnOrderID)
+    {
+        try
+        {
+            s = c.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            rs = s.executeQuery("SELECT rl.ReturnOrderlineID, rl.ReturnOrderID, s.StockItemID, s.StockItemName, rl.Quantity, s.EANCode, s.TaxRate, s.UnitRetailPrice FROM returnorderlines AS rl JOIN stockitems AS s ON rl.StockItemID = s.StockItemID WHERE rl.ReturnOrderID="+returnOrderID+";");
+
+            String[][] data = new String[GetRowCount(rs)][8];
+
+            int i = 0;
+            while (rs.next())
+            {
+                int returnOrderlineID = rs.getInt("ReturnOrderlineID");
+                int stockItemID = rs.getInt("StockItemID");
+                String stockItemName = rs.getString("StockItemName");
+                int quantity = rs.getInt("Quantity");
+                String eanCode = rs.getString("EANCode");
+                float taxRate = rs.getFloat("TaxRate");
+                float unitRetailPrice = rs.getFloat("UnitRetailPrice");
+
+                data[i][0] = returnOrderlineID +"";
+                data[i][1] = stockItemID+"";
+                data[i][2] = stockItemName;
+                data[i][3] = quantity+"";
+                data[i][4] = eanCode;
+                data[i][5] = taxRate+"%";
+                data[i][6] = "€"+unitRetailPrice;
+                data[i][7] = "€"+Math.round((unitRetailPrice*quantity)*100.0)/100.0;
+
+                i++;
+            }
+            return data;
+        }
+        catch (Exception ex)
+        {
+            System.out.println(ex.getMessage());
+        }
+        return null;
+    }
+
+    public String returnOrderID_r, orderID_r,customerID_r,returnOrderDate,status_r,firstName_r,suffix_r,lastName_r,emailAddress_r,mobilePhone_r,address_r,postalCode_r,placeOfResidence_r;
+    public void getReturnOrderLinesVariables(Object returnOrderID)
+    {
+        try
+        {
+            s = c.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            rs = s.executeQuery("SELECT r.ReturnOrderID, r.OrderID, r.CustomerID, r.ReturnOrderDate, r.Status, c.FirstName, c.Suffix, c.LastName, c.EmailAddress, c.MobilePhone, c.Address, c.PostalCode, c.PlaceOfResidence FROM returnorders AS r JOIN customers AS c on r.CustomerID = c.CustomerID WHERE r.ReturnOrderID="+returnOrderID+";");
+
+            while (rs.next())
+            {
+                returnOrderID_r = rs.getString("ReturnOrderID");
+                orderID_r = rs.getString("OrderID");
+                customerID_r = rs.getString( "CustomerID");
+                returnOrderDate = rs.getString("ReturnOrderDate");
+                status_r = rs.getString("Status");
+                firstName_r = rs.getString("FirstName");
+                suffix_r = rs.getString("Suffix");
+                lastName_r = rs.getString("LastName");
+                emailAddress_r = rs.getString("EmailAddress");
+                mobilePhone_r = rs.getString("MobilePhone");
+                address_r = rs.getString("Address");
+                postalCode_r = rs.getString("PostalCode");
+                placeOfResidence_r = rs.getString("PlaceOfResidence");
+            }
+        }
+        catch (Exception ex)
+        {
+            System.out.println(ex.getMessage());
+        }
+    }
 }
