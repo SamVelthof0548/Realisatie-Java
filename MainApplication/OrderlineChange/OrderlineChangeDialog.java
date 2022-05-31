@@ -1,30 +1,30 @@
-package MainApplication.CustomerChange;
+package MainApplication.OrderlineChange;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class CustomerChangeDialog extends JDialog implements ActionListener {
+public class OrderlineChangeDialog extends JDialog implements ActionListener {
     JButton JBoke;
-    JTextField JTcustomerID;
+    JTextField JTorderlineID;
     JLabel JLvraag;
     static JFrame frame;
-    static int klantnummer;
+    static int orderlinenummer;
     static boolean gelukt;
 
-    public CustomerChangeDialog(JFrame frame)
+    public OrderlineChangeDialog(JFrame frame)
     {
         super(frame,true);
-        CustomerChangeDialog.frame=frame;
-        setTitle("Klant Wijzigen");
+        OrderlineChangeDialog.frame=frame;
+        setTitle("Order Wijzigen");
         setLayout(new GridLayout(3,1));
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         setSize(new Dimension(600, 200));
         setLocationRelativeTo(null);
 
-        add(JLvraag=new JLabel("Klantnummer van de te wijzigen klant"));
-        add(JTcustomerID =new JTextField(10));
+        add(JLvraag=new JLabel("Orderregelnummer van de te wijzigen orderregel"));
+        add(JTorderlineID =new JTextField(10));
         add(JBoke=new JButton("Oké"));
         JBoke.addActionListener(this);
         setVisible(true);
@@ -36,7 +36,7 @@ public class CustomerChangeDialog extends JDialog implements ActionListener {
         {
             try
             {
-                klantnummer =Integer.parseInt(JTcustomerID.getText());
+                orderlinenummer =Integer.parseInt(JTorderlineID.getText());
                 gelukt=true;
             }
             catch (NumberFormatException nfe)
@@ -46,7 +46,7 @@ public class CustomerChangeDialog extends JDialog implements ActionListener {
             }
             if (gelukt)
             {
-                CustomerChange customerChange = new CustomerChange(frame);
+                OrderlineChange orderChange = new OrderlineChange(frame);
                 setVisible(false);
             }
         }

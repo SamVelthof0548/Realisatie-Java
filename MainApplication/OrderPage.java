@@ -1,6 +1,8 @@
 package MainApplication;
 
 import DataBaseConnection.SQLMethods;
+import MainApplication.OrderlineChange.OrderlineChangeDialog;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -15,6 +17,7 @@ public class OrderPage extends JPanel implements ActionListener
     private JScrollPane ordersWeergeven;
     private JTable JTabelOrders;
     private JButton JBtoevoegenOrders;
+    private JButton JBwijzigenOrder;
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     int screenHeight = screenSize.height;
     int screenWidth = screenSize.width;
@@ -24,6 +27,7 @@ public class OrderPage extends JPanel implements ActionListener
         add(Orders);
         Orders.setPreferredSize(new Dimension(screenWidth, 500));
         JBtoevoegenOrders.addActionListener(this);
+        JBwijzigenOrder.addActionListener(this);
         Orders.setVisible(true);
     }
 
@@ -43,6 +47,10 @@ public class OrderPage extends JPanel implements ActionListener
         if (e.getSource()==JBtoevoegenOrders)
         {
             OrderAdd orderAdd = new OrderAdd(setframe);
+        }
+        if (e.getSource()==JBwijzigenOrder)
+        {
+            OrderlineChangeDialog changeDialog =new OrderlineChangeDialog(setframe);
         }
     }
 }
