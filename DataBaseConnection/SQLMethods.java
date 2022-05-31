@@ -292,7 +292,7 @@ public class SQLMethods
                 data[i][4] = eanCode;
                 data[i][5] = taxRate+"%";
                 data[i][6] = "€"+unitRetailPrice;
-                data[i][7] = "€"+(unitRetailPrice*quantity);
+                data[i][7] = "€"+Math.round((unitRetailPrice*quantity)*100.0)/100.0;
 
                 i++;
                 aantalResultaten++;
@@ -364,7 +364,7 @@ public class SQLMethods
                 data[i][4] = eanCode;
                 data[i][5] = taxRate+"%";
                 data[i][6] = "€"+unitRetailPrice;
-                data[i][7] = "€"+(unitRetailPrice*quantity);
+                data[i][7] = "€"+Math.round((unitRetailPrice*quantity)*100.0)/100.0;
 
                 i++;
                 aantalResultaten++;
