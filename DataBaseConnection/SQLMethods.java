@@ -1,5 +1,6 @@
 package DataBaseConnection;
 
+import java.math.BigDecimal;
 import java.sql.*;
 
 public class SQLMethods
@@ -266,6 +267,42 @@ public class SQLMethods
 
     public String[][] viewOrderLinesData(Object orderID)
     {
+        try
+        {
+            s = c.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            rs = s.executeQuery("SELECT ol.OrderLineID, ol.OrderID, ol.StockItemID, s.StockItemName, ol.Quantity, s.EANCode, s.TaxRate, s.UnitRetailPrice FROM orderlines AS ol JOIN stockitems AS s ON ol.StockItemID = s.StockItemID WHERE OrderID = "+orderID+" ORDER BY OrderLineID;");
+
+            String[][] data = new String[GetRowCount(rs)][8];
+
+            int i = 0;
+            int aantalResultaten = 1;
+            while (rs.next())
+            {
+                int stockItemID = rs.getInt("StockItemID");
+                String stockItemName = rs.getString("StockItemName");
+                int quantity = rs.getInt("Quantity");
+                String eanCode = rs.getString("EANCode");
+                float taxRate = rs.getFloat("TaxRate");
+                float unitRetailPrice = rs.getFloat("UnitRetailPrice");
+
+                data[i][0] = aantalResultaten+"";
+                data[i][1] = stockItemID+"";
+                data[i][2] = stockItemName;
+                data[i][3] = quantity+"";
+                data[i][4] = eanCode;
+                data[i][5] = taxRate+"%";
+                data[i][6] = "€"+unitRetailPrice;
+                data[i][7] = "€"+(unitRetailPrice*quantity);
+
+                i++;
+                aantalResultaten++;
+            }
+            return data;
+        }
+        catch (Exception ex)
+        {
+            System.out.println(ex.getMessage());
+        }
         return null;
     }
 

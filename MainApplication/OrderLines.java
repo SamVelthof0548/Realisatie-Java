@@ -14,7 +14,7 @@ public class OrderLines extends JFrame
 
         JFrame OrderLines = new JFrame();
         setTitle("Ordernummer: "+orderID);
-        setSize(600,400);
+        setSize(1000,400);
         setLocationRelativeTo(null);
         setLayout(new GridLayout(2,1));
 
@@ -50,7 +50,11 @@ public class OrderLines extends JFrame
         PData.add(new JLabel("Verwachte leverdatum:"));
         PData.add(new JLabel(sqlMethods.expectedDeliveryDate));
 
-        JScrollPane PTable = new JScrollPane();
+        String[][] OrderLinesData = sqlMethods.viewOrderLinesData(orderID);
+        String[] OrderLinesColumns = {"","Productnummer","Omschrijving","Aantal","Barcode","BTW","Prijs per stuk","Prijs"};
+        JTable OrderLinesTabel = new JTable(OrderLinesData, OrderLinesColumns);
+
+        JScrollPane PTable = new JScrollPane(OrderLinesTabel);
 
         add(PData);
         add(PTable);
