@@ -2,6 +2,7 @@ package DataBaseConnection;
 
 import javax.swing.*;
 import java.sql.*;
+import java.util.Calendar;
 
 public class SQLMethods
 {
@@ -262,5 +263,137 @@ public class SQLMethods
         }
         catch (Exception ex) {System.out.println(ex.getMessage());}
         return null;
+    }
+
+    //functie om de ingevulde waardes van een nieuw product in de database te zetten
+    public void addProduct(String productNaam,String productGrootte,double productGewicht,String eancode,double belastingpercentage,double prijs,double verkoopprijs,int voorraad)
+    {
+        try
+        {
+            String query="insert into stockitems (StockItemName,UnitSize,UnitWeight,EANCode,TaxRate,UnitPrice,UnitRetailPrice,LastEditedWhen)"
+                    + " values (?,?,?,?,?,?,?,current_timestamp())";
+
+            PreparedStatement stmt = c.prepareStatement(query);
+            stmt.setString(1,productNaam);
+            stmt.setString(2,productGrootte);
+            stmt.setDouble(3,productGewicht);
+            stmt.setString(4,eancode);
+            stmt.setDouble(5,belastingpercentage);
+            stmt.setDouble(6,prijs);
+            stmt.setDouble(7,verkoopprijs);
+
+            stmt.execute();
+
+//            String query1="select StockItemID from stockitems where EANCode = ?";
+//
+//            PreparedStatement stmt1 = c.prepareStatement(query);
+//            stmt1.setString(1,eancode);
+
+            String query2="insert into stockitemholdings (StockItemID,QuantityOnHand,LastEditedWhen)"
+                    + " values (?,?,current_timestamp())";
+
+//            PreparedStatement stmt2 = c.prepareStatement(query2);
+//            stmt.setInt(1,);
+//            stmt.setInt(2,voorraad);
+//
+//            stmt2.execute();
+
+            c.close();
+        }
+        catch (Exception ex) {System.out.println(ex.getMessage());}
+    }
+
+    //functie om de ingevulde waardes van een nieuwe klant in de database te zetten
+    //**deze functie is als een klant WEL een tussenvoegsel heeft**
+    public void addKlant(String geslacht,String voornaam,String tussenvoegsel,String achternaam,Date geboortedatum,String mailadres,String telefoonnummer,String adres,String postcode,String woonplaats)
+    {
+        try
+        {
+            String query="insert into customers (Sex,FirstName,Suffix,LastName,BirthDate,EmailAddress,MobilePhone,Address,PostalCode,PlaceOfResidence,LastEditedWhen)"
+                    + " values (?,?,?,?,?,?,?,?,?,?,current_timestamp())";
+
+            PreparedStatement stmt = c.prepareStatement(query);
+            stmt.setString(1,geslacht);
+            stmt.setString(2,voornaam);
+            stmt.setString(3,tussenvoegsel);
+            stmt.setString(4,achternaam);
+            stmt.setDate(5,geboortedatum);
+            stmt.setString(6,mailadres);
+            stmt.setString(7,telefoonnummer);
+            stmt.setString(8,adres);
+            stmt.setString(9,postcode);
+            stmt.setString(10,woonplaats);
+
+            stmt.execute();
+            c.close();
+        }
+        catch (Exception ex) {System.out.println(ex.getMessage());}
+    }
+
+    //functie om de ingevulde waardes van een nieuwe klant in de database te zetten
+    //**deze functie is als een klant NIET een tussenvoegsel heeft**
+    public void addKlant1(String geslacht,String voornaam,String achternaam,Date geboortedatum,String mailadres,String telefoonnummer,String adres,String postcode,String woonplaats)
+    {
+        try
+        {
+            String query="insert into customers (Sex,FirstName,Suffix,LastName,BirthDate,EmailAddress,MobilePhone,Address,PostalCode,PlaceOfResidence,LastEditedWhen)"
+                    + " values (?,?,?,?,?,?,?,?,?,?,current_timestamp())";
+
+            PreparedStatement stmt = c.prepareStatement(query);
+            stmt.setString(1,geslacht);
+            stmt.setString(2,voornaam);
+            stmt.setString(3,"");
+            stmt.setString(4,achternaam);
+            stmt.setDate(5,geboortedatum);
+            stmt.setString(6,mailadres);
+            stmt.setString(7,telefoonnummer);
+            stmt.setString(8,adres);
+            stmt.setString(9,postcode);
+            stmt.setString(10,woonplaats);
+
+            stmt.execute();
+            c.close();
+        }
+        catch (Exception ex) {System.out.println(ex.getMessage());}
+    }
+
+    public void addOrder(int klantID,Date orderdatum,Date verwachtLeverdatum,String opmerkingen)
+    {
+        try
+        {
+            String query="insert into orders (CustomerID, OrderDate, ExpectedDeliveryDate, Comments, Status, LastEditedWhen)"
+                    + " values (?,?,?,?,?,current_timestamp())";
+
+            PreparedStatement stmt = c.prepareStatement(query);
+            stmt.setInt(1,klantID);
+            stmt.setDate(2,orderdatum);
+            stmt.setDate(3,verwachtLeverdatum);
+            stmt.setString(4,opmerkingen);
+            stmt.setString(5,"Open");
+
+            stmt.execute();
+            c.close();
+        }
+        catch (Exception ex) {System.out.println(ex.getMessage());}
+    }
+
+    public void addReturn(int orderID,int klantID,Date retourdatum,String opmerkingen)
+    {
+        try
+        {
+            String query="insert into returnorders (OrderID, CustomerID, ReturnOrderDate, Comments, Status, LastEditedWhen)"
+                    + " values (?,?,?,?,?,current_timestamp())";
+
+            PreparedStatement stmt = c.prepareStatement(query);
+            stmt.setInt(1,orderID);
+            stmt.setInt(2,klantID);
+            stmt.setDate(3,retourdatum);
+            stmt.setString(4,opmerkingen);
+            stmt.setString(5,"Open");
+
+            stmt.execute();
+            c.close();
+        }
+        catch (Exception ex) {System.out.println(ex.getMessage());}
     }
 }

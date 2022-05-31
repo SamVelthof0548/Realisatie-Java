@@ -14,9 +14,11 @@ public class MainApplication extends JFrame implements ActionListener{
     private CustomerPage customerPage;
     private OrderPage orderPage;
     private ReturnPage returnPage;
+    static JFrame setframe;
 
     public MainApplication()
     {
+        setframe = this;
         setTitle("KBS Project");
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
