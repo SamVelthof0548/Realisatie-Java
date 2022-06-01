@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MainApplication extends JFrame implements ActionListener{
+public class MainApplication extends JFrame implements ActionListener {
     private JButton BtnRoute, BtnReturns, BtnStock, BtnCustomer, BtnOrders;
     private JPanel MainFrame, MainScreen;
     private CardLayout card;

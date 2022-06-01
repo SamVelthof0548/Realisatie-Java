@@ -18,7 +18,7 @@ public class SQLMethods
         {
             String url = "jdbc:mysql://localhost/nerdygadgetsnl";
             String user = "root";
-            String password = "";
+            String password = "123456789";
 
             c = DriverManager.getConnection(url, user, password);
         }
@@ -192,7 +192,7 @@ public class SQLMethods
 
                 i++;
             }
-            c.close();
+
             return model;
         }
         catch (Exception ex) {
@@ -201,14 +201,14 @@ public class SQLMethods
         }
     }
 
-    public String[] ViewReturnDataRoutepage()
+    public DefaultListModel ViewReturnDataRoutepage()
     {
         try
         {
             s = c.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            rs = s.executeQuery("SELECT o.OrderID, c.CustomerID, c.Address, c.PostalCode, c.PlaceOfResidence FROM orders AS o LEFT JOIN customers AS c on o.CustomerID = c.CustomerID ORDER BY o.OrderID;");
+            rs = s.executeQuery("SELECT r.OrderID, c.CustomerID, c.Address, c.PostalCode, c.PlaceOfResidence FROM returnorders AS r LEFT JOIN customers AS c on r.CustomerID = c.CustomerID WHERE r.status = 'open' ORDER BY r.OrderID;");
 
-            String[] data = new String[GetRowCount(rs)];
+            DefaultListModel model = new DefaultListModel();
 
             int i = 0;
             while (rs.next())
@@ -219,18 +219,17 @@ public class SQLMethods
                 String postalCode = rs.getString("PostalCode");
                 String placeOfResidence = rs.getString("PlaceOfResidence");
 
-                data[i] = orderID + " " + customerID + " " + address + " " + postalCode + " " + placeOfResidence;
+                model.addElement(orderID + ", " + placeOfResidence + ", " + postalCode + ", " + address);
 
                 i++;
             }
-            c.close();
-            return data;
+
+            return model;
         }
         catch (Exception ex) {
             System.out.println(ex.getMessage());
+            return null;
         }
-
-        return new String[]{"Geen orders beschikbaar"};
     }
 
 //    Functie om de data uit de returnorders tabel op te halen.

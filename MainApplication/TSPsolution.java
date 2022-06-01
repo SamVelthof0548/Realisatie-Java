@@ -5,6 +5,7 @@ import kong.unirest.HttpResponse;
 import kong.unirest.JsonNode;
 import kong.unirest.Unirest;
 import kong.unirest.json.JSONArray;
+import kong.unirest.json.JSONException;
 import kong.unirest.json.JSONObject;
 import org.jxmapviewer.JXMapViewer;
 import org.jxmapviewer.OSMTileFactoryInfo;
@@ -54,9 +55,13 @@ public class TSPsolution {
             .body(headerData)
             .asJson();
 
-        JSONObject solution = response.getBody().getObject().getJSONObject("solution");
-
-        return solution;
+        try {
+            JSONObject solution = response.getBody().getObject().getJSONObject("solution");
+            return solution;
+        } catch (JSONException e) {
+            JOptionPane.showMessageDialog(null,"Je kunt niet meer dan 5 locaties gebruiken, verhoog je abonnement www.graphhopper.com","FOUT!!",JOptionPane.ERROR_MESSAGE);
+        }
+        return null;
     }
 
     // function to create main header data
