@@ -91,20 +91,20 @@ public class RoutePage extends JPanel implements ActionListener {
 
         coordinates = new ArrayList<>();
         streetHints = new ArrayList<>();
-        orderIds = new ArrayList<>();
+//        orderIds = new ArrayList<>();
 
         for (Object order : orders) {
             String input = String.valueOf(order);
             coordinates.add(getLongLang(input));
             streetHints.add(input);
-            orderIds.add(getOrderId(input));
+//            orderIds.add(getOrderId(input));
         }
 
         for (Object retour : returns) {
             String input = String.valueOf(retour);
             coordinates.add(getLongLang(input));
             streetHints.add(input);
-            orderIds.add(getOrderId(input));
+//            orderIds.add(getOrderId(input));
         }
     }
 
@@ -126,11 +126,11 @@ public class RoutePage extends JPanel implements ActionListener {
 
         solution = new TSPsolution(startLon, startLat, coordinates, streetHints);
 
-        for (int orderId : orderIds) {
-            SQLMethods sql = new SQLMethods();
-            sql.CreateDataBaseConnection();
-            sql.updateOrderStatus(orderId);
-        }
+//        for (int orderId : orderIds) {
+//            SQLMethods sql = new SQLMethods();
+//            sql.CreateDataBaseConnection();
+//            sql.updateOrderStatus(orderId);
+//        }
 
         // create a map to display the optimal route
         solution.createRouting(); // show map

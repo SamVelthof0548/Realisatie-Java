@@ -697,14 +697,14 @@ public class SQLMethods
         }
     }
 
-    public void updateOrderStatus(int orderId) {
-        try
-        {
-            String query="UPDATE orders SET Status='Afgerond' WHERE OrderID="+orderId;
-            PreparedStatement stmt = c.prepareStatement(query);
-            stmt.execute();
-            c.close();
-        }
-        catch (Exception ex) {System.out.println(ex.getMessage());}
-    }
+//    public void updateOrderStatus(int orderId) {
+//        try
+//        {
+//            String query="UPDATE orders SET Status='Afgerond' WHERE OrderID="+orderId;
+//            PreparedStatement stmt = c.prepareStatement(query);
+//            stmt.execute();
+//            c.close();
+//        }
+//        catch (Exception ex) {System.out.println(ex.getMessage());}
+//    }
 }
