@@ -81,7 +81,7 @@ public class RoutePage extends JPanel implements ActionListener {
     }
 
     public int getOrderId(String input) {
-        return input.charAt(0);
+        return Integer.parseInt(String.valueOf(input.charAt(0)));
     }
 
     // get the selected values from the JList
@@ -128,6 +128,7 @@ public class RoutePage extends JPanel implements ActionListener {
 
         for (int orderId : orderIds) {
             SQLMethods sql = new SQLMethods();
+            sql.CreateDataBaseConnection();
             sql.updateOrderStatus(orderId);
         }
 
