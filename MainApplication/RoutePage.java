@@ -15,8 +15,6 @@ import java.sql.SQLException;
 import javax.swing.DefaultListModel;
 import java.util.ArrayList;
 
-import org.jxmapviewer.viewer.GeoPosition;
-
 public class RoutePage extends JPanel implements ActionListener {
     private JButton button1;
     private JPanel Routebepaling;
@@ -26,8 +24,8 @@ public class RoutePage extends JPanel implements ActionListener {
 
     private JList orderlist, returnlist;
     private ArrayList<double[]> coordinates; // longitude and latitude of selected addresses
-    private ArrayList<GeoPosition> geopositions; // longitude and latitude of optimized route points
     private ArrayList<String> streetHints; // street hints to help Graphhopper api locate coordinates
+    private ArrayList<Integer> orderIds;
 
     // set dimensions of the screen
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -82,6 +80,10 @@ public class RoutePage extends JPanel implements ActionListener {
         return coords;
     }
 
+    public int getOrderId(String input) {
+        return input.charAt(0);
+    }
+
     // get the selected values from the JList
     public void getValues() {
         Object[] orders = orderlist.getSelectedValues();
@@ -89,17 +91,20 @@ public class RoutePage extends JPanel implements ActionListener {
 
         coordinates = new ArrayList<>();
         streetHints = new ArrayList<>();
+        orderIds = new ArrayList<>();
 
         for (Object order : orders) {
             String input = String.valueOf(order);
             coordinates.add(getLongLang(input));
             streetHints.add(input);
+            orderIds.add(getOrderId(input));
         }
 
         for (Object retour : returns) {
             String input = String.valueOf(retour);
             coordinates.add(getLongLang(input));
             streetHints.add(input);
+            orderIds.add(getOrderId(input));
         }
     }
 
@@ -120,6 +125,11 @@ public class RoutePage extends JPanel implements ActionListener {
         }
 
         solution = new TSPsolution(startLon, startLat, coordinates, streetHints);
+
+        for (int orderId : orderIds) {
+            SQLMethods sql = new SQLMethods();
+            sql.updateOrderStatus(orderId);
+        }
 
         // create a map to display the optimal route
         solution.createRouting(); // show map

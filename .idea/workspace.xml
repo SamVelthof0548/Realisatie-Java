@@ -4,14 +4,9 @@
     <list default="true" id="233e2c72-1d92-4178-8eb3-f35a8c4e6c4c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DataBaseConnection/SQLMethods.java" beforeDir="false" afterPath="$PROJECT_DIR$/DataBaseConnection/SQLMethods.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MainApplication/RoutePage.form" beforeDir="false" afterPath="$PROJECT_DIR$/MainApplication/RoutePage.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MainApplication/CustomerChange/CustomerChange.java" beforeDir="false" afterPath="$PROJECT_DIR$/MainApplication/CustomerChange/CustomerChange.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MainApplication/RoutePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/MainApplication/RoutePage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MainApplication/TSPsolution.java" beforeDir="false" afterPath="$PROJECT_DIR$/MainApplication/TSPsolution.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Realisatie-Java/DataBaseConnection/SQLMethods.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Realisatie-Java/DataBaseConnection/SQLMethods.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Realisatie-Java/MainApplication/OrderPage$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Realisatie-Java/MainApplication/OrderPage$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Realisatie-Java/MainApplication/OrderPage.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Realisatie-Java/MainApplication/OrderPage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Realisatie-Java/MainApplication/ReturnPage$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Realisatie-Java/MainApplication/ReturnPage$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Realisatie-Java/MainApplication/ReturnPage.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Realisatie-Java/MainApplication/ReturnPage.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Realisatie-Java/MainApplication/RoutePage.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Realisatie-Java/MainApplication/RoutePage.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

@@ -107,5 +107,6 @@ public class CustomerChange extends JDialog implements ActionListener {
         {
             setVisible(false);
         }
+
     }
 }
